@@ -13,16 +13,18 @@ import ListingDetails from './components/ListingDetails/ListingDetails';
 import ListingForm from './components/ListingForm/ListingForm';
 
 //-----------------------------------------------Service Imports-----------------------------------------//
-import * as authService from '../src/services/authService'; 
+import * as authService from '../src/services/authService';
 import * as listingService from './services/listingService';
 
 
 
 const App = () => {
 
-  return (
-    
+  return (<>
     <h1>Hello world!</h1>
+    {/* Temp For testing purposes */}
+    <SignupForm />
+  </>
   );
 }
 
