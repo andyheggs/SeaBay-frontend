@@ -9,7 +9,8 @@ import * as authService from '../../services/authService';
 
 
 const SignupForm = () => {
-
+    const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState([""])
     const [formData, setformData] = useState({
         username: "",
         email: "",
@@ -17,8 +18,23 @@ const SignupForm = () => {
         verifyPassword: "",
     })
 
-    const handleChange = () => {
+    const updateMessage = (error) => {
+        setErrorMessage(error)
+    }
 
+    const handleChange = (event) => {
+        setformData({...formData, [event.target.name]: event.target.value})
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const newUserResponse = await authService.signup(formData)
+            props.setUser(newUserResponse.user)
+            navigate("/")
+        } catch (error) {
+            updateMessage(error.message)
+        }
     }
 
     const {username, email, password, verifyPassword} = formData
@@ -26,7 +42,7 @@ const SignupForm = () => {
     return (
         <main>
             <h1>Welcome to your SignupForm</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div>
                 <label for="usernameInput"></label>
                 <input id="usernameInput" type="text" value={username} name="username" onChange={handleChange}></input>
@@ -40,13 +56,13 @@ const SignupForm = () => {
                 <label for="passwordVerifyInput"></label>
                 <input id="passwordVerifyInput" type="text" value={verifyPassword} name="verifyPassword" onChange={handleChange}></input>
                 </div>
-                <button></button>
+                <button>Create Account</button>
             </form>
         </main>
-    );
+    )
 
     
-};    
+}
 
 
 
