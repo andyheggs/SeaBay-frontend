@@ -7,7 +7,6 @@ import { Link, useNavigate } from 'react-router-dom';
 //--------------------------------------------Service Imports----------------------------------------------//
 import * as authService from '../../../services/authService';
 
-
 const SignupForm = (props) => {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState([""])
