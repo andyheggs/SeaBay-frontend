@@ -28,6 +28,7 @@ const App = () => {
   }
 
   return (
+    // Creates context so we can use create context on the user value
   <AuthedUserContext.Provider value={user}>
     <Navbar handleSignout={handleSignout}/>
     <h1>Hello {user?user.username : "New User"}!</h1>
