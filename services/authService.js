@@ -6,16 +6,19 @@ const signup = async (formData) => {
          const res = await fetch(`${BACKEND_URL}/profiles/signup`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body:JSON.stringify(formData),
+            body: JSON.stringify(formData),
          })
         //  Converts response to json format
          const data = await res.json()
+         console.log("Data")
+         console.log(data)
         //  Checks for a returned error
          if (data.error) throw new Error(data.error)
         // Adding returned token to the client's local storage
-        localStorage.setItem("token", json.token)
+        localStorage.setItem("token", data.token)
          return data
     } catch (error) {
+        console.log(error)
         throw new Error(error)
     }
 }

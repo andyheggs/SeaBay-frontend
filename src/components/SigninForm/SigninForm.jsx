@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 //-------------------------------------------Component Imports---------------------------------------------//
 
 //--------------------------------------------Service Imports----------------------------------------------//
-import * as authService from '../../services/authService';
+import * as authService from '../../../services/authService';
 
 
 const SigninForm = () => {
