@@ -23,7 +23,7 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   const handleSignout = () => {
-    authService.Signout()
+    authService.signout()
     setUser(null)
   }
 
