@@ -31,8 +31,7 @@ const SigninForm = (props) => {
             // Runs user fetch from the services file
             const userResponse = await authService.signin(formData)
             // updates the user value in app.jsx
-            props.setUser(userResponse.newUser)
-            console.log(user)
+            props.setUser(userResponse.user)
             // re-routes to the home directory
             navigate("/")
         } catch (error) {
