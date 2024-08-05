@@ -15,9 +15,7 @@ const SigninForm = (props) => {
     const [errorMessage, setErrorMessage] = useState([""])
     const [formData, setformData] = useState({
         username: "",
-        email: "",
         password: "",
-        verifyPassword: "",
     })
 
     // Used to display error messages to the user
@@ -34,9 +32,9 @@ const SigninForm = (props) => {
         event.preventDefault();
         try {
             // Runs user fetch from the services file
-            const newUserResponse = await authService.signup(formData)
+            const userResponse = await authService.signin(formData)
             // updates the user value in app.jsx
-            props.setUser(newUserResponse.newUser)
+            props.setUser(userResponse.newUser)
             // re-routes to the home directory
             navigate("/")
         } catch (error) {
@@ -45,11 +43,11 @@ const SigninForm = (props) => {
     }
 
     // Deconstructs the formData
-    const {username, email, password, verifyPassword} = formData
+    const {username, password} = formData
 
     const checkValidInput = () => {
         // Returns true if input's data is incorrect
-        return !(username && email && password && password === verifyPassword)
+        return !(username && password)
     }
 
     return (
@@ -61,16 +59,10 @@ const SigninForm = (props) => {
                 <label htmlFor="usernameInput">Username</label>
                 <input id="usernameInput" type="text" value={username} name="username" onChange={handleChange}></input>
                 </div><div>
-                <label htmlFor="emailInput">Email</label>
-                <input id="emailInput" type="text" value={email} name="email" onChange={handleChange}></input>
-                </div><div>
                 <label htmlFor="passwordInput">Password</label>
                 <input id="passwordInput" type="text" value={password} name="password" onChange={handleChange}></input>
-                </div><div>
-                <label htmlFor="passwordVerifyInput">Re-Type Password</label>
-                <input id="passwordVerifyInput" type="text" value={verifyPassword} name="verifyPassword" onChange={handleChange}></input>
                 </div>
-                <button disabled={checkValidInput()}>Create Account</button>
+                <button disabled={checkValidInput()}>Sign In</button>
             </form>
         </main>
     )
