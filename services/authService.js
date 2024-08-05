@@ -25,7 +25,18 @@ const signup = async (formData) => {
 
 const signin = async (formData) => {
     try {
-        
+        const res = await fetch(`${BACKEND_URL}/profiles/signin`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+          const data = await res.json()
+          if (data.error) throw new Error(data.error)
+            if (data.token){
+                localStorage.setItem("token", data.token)
+                const user = JSON.parse(atob(data.token.split(".")[1]))
+                return user
+            }
     } catch (error) {
         console.log(error)
         throw new Error(error)
