@@ -16,17 +16,18 @@ import ListingForm from './components/ListingForm/ListingForm';
 import * as authService from '../services/authService';
 import * as listingService from '../services/listingService';
 
-
+export const AuthedUserContext = createContext(null);
 
 const App = () => {
 
   const [user, setUser] = useState(null)
 
-  return (<>
+  return (<AuthedUserContext.Provider value={user}>
+    <Navbar/>
     <h1>Hello {user?user.username : "New User"}!</h1>
     {/* Temp For testing purposes */}
     <SigninForm setUser={setUser}/>
-  </>
+    </AuthedUserContext.Provider>
   );
 }
 
