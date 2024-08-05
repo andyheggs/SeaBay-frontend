@@ -23,4 +23,13 @@ const signup = async (formData) => {
     }
 }
 
-export {signup}
+const signin = async (formData) => {
+    try {
+        
+    } catch (error) {
+        console.log(error)
+        throw new Error(error)
+    }
+}
+
+export {signup, signin}
