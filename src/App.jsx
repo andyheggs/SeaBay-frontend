@@ -25,7 +25,7 @@ const App = () => {
   return (<>
     <h1>Hello {user?user.username : "New User"}!</h1>
     {/* Temp For testing purposes */}
-    <SignupForm setUser={setUser}/>
+    <SigninForm setUser={setUser}/>
   </>
   );
 }
