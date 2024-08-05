@@ -22,9 +22,14 @@ const App = () => {
 
   const [user, setUser] = useState(null)
 
+  const handleSignout = () => {
+    authService.Signout()
+    setUser(null)
+  }
+
   return (
   <AuthedUserContext.Provider value={user}>
-    <Navbar/>
+    <Navbar handleSignout={handleSignout}/>
     <h1>Hello {user?user.username : "New User"}!</h1>
     {/* Temp For testing purposes */}
     <SigninForm setUser={setUser}/>
