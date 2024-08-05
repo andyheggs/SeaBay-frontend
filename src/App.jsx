@@ -22,7 +22,8 @@ const App = () => {
 
   const [user, setUser] = useState(null)
 
-  return (<AuthedUserContext.Provider value={user}>
+  return (
+  <AuthedUserContext.Provider value={user}>
     <Navbar/>
     <h1>Hello {user?user.username : "New User"}!</h1>
     {/* Temp For testing purposes */}
