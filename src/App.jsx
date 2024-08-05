@@ -1,6 +1,6 @@
 //---------------------------------------------React Imports-----------------------------------------------// 
 import { useState, useEffect, createContext } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Router } from 'react-router-dom';
 
 //---------------------------------------------Componenet Imports-----------------------------------------//
 import Navbar from './components/Navbar/Navbar';
@@ -31,9 +31,18 @@ const App = () => {
     // Creates context so we can use create context on the user value
   <AuthedUserContext.Provider value={user}>
     <Navbar handleSignout={handleSignout}/>
-    <h1>Hello {user?user.username : "New User"}!</h1>
-    {/* Temp For testing purposes */}
-    <SigninForm setUser={setUser}/>
+    <Routes>
+      {(user)?(<>
+      <Route path="/profiles/:userId/dashboard" element={<Dashboard/>}></Route>
+      <Route path="/listings/create" element={<ListingForm/>}></Route>
+      </>):(<></>)}
+      <Route path="/" element={<Landing/>}></Route>
+      <Route path="/profiles/signin" element={<SigninForm setUser={setUser}/>}></Route>
+      <Route path="/profiles/signup" element={<SignupForm setUser={setUser}/>}></Route>
+      <Route path="/listings" element={<ListingList/>}></Route>
+      <Route path="/listings/:listingId" element={<ListingDetails/>}></Route>
+      
+    </Routes>
     </AuthedUserContext.Provider>
   );
 }
