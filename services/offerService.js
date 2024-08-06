@@ -35,7 +35,7 @@ const getOffersFromUser = async (userId) => {
 
 const assessOffer = async (rejected) => {
     try {
-        const res = await fetch(`${BACKEND_URL}/offers/${offerId}?rejected:${rejected}`, {
+        const res = await fetch(`${BACKEND_URL}/offers/assess/${offerId}?rejected:${rejected}`, {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
         })
@@ -64,9 +64,16 @@ const createAnOffer = async (formData) => {
     }
 }
 
-const editAnOffer = async (formData) => {
+const editAnOffer = async (offerId, formData) => {
     try {
-        
+        const res = await fetch(`${BACKEND_URL}/offers/${offerId}`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(formData),
+        })
+        const data = res.json()
+        if (data.error) throw new Error(data.error)
+        return data
     } catch (error) {
         console.log(error)
         throw new Error(error)
@@ -75,7 +82,13 @@ const editAnOffer = async (formData) => {
 
 const deleteAnOffer = async (offerId) => {
     try {
-        
+        const res = await fetch(`${BACKEND_URL}/offers/${offerId}`, {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
+        })
+        const data = res.json()
+        if (data.error) throw new Error(data.error)
+        return data
     } catch (error) {
         console.log(error)
         throw new Error(error)
