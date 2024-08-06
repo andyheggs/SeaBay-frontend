@@ -1,4 +1,4 @@
-import { getToken } from './authService.js';
+// import { getToken } from './authService.js';
 
 const BACKEND_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/listings`;
 
