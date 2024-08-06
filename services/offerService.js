@@ -35,7 +35,13 @@ const getOffersFromUser = async (userId) => {
 
 const assessOffer = async (rejected) => {
     try {
-        
+        const res = await fetch(`${BACKEND_URL}/${offerId}?rejected:${rejected}`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+        })
+        const data = res.json()
+        if (data.error) throw new Error(data.error)
+        return data
     } catch (error) {
         console.log(error)
         throw new Error(error)
