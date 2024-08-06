@@ -2,7 +2,7 @@ const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL;
 
 const getOfferFromId = async (offerId) => {
     try {
-        const res = await fetch(`${BACKEND_URL}/${offerId}`, {
+        const res = await fetch(`${BACKEND_URL}/offers/${offerId}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -35,7 +35,7 @@ const getOffersFromUser = async (userId) => {
 
 const assessOffer = async (rejected) => {
     try {
-        const res = await fetch(`${BACKEND_URL}/${offerId}?rejected:${rejected}`, {
+        const res = await fetch(`${BACKEND_URL}/offers/${offerId}?rejected:${rejected}`, {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
         })
@@ -50,7 +50,14 @@ const assessOffer = async (rejected) => {
 
 const createAnOffer = async (formData) => {
     try {
-        
+        const res = await fetch(`${BACKEND_URL}/offers/`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(formData),
+        })
+        const data = res.json()
+        if (data.error) throw new Error(data.error)
+        return data
     } catch (error) {
         console.log(error)
         throw new Error(error)
