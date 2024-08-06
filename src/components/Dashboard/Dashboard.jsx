@@ -3,6 +3,7 @@ import { useContext } from 'react';
 
 
 //-------------------------------------------Component Imports---------------------------------------------//
+import { AuthedUserContext } from '../../App'
 
 //--------------------------------------------Service Imports----------------------------------------------//
 
@@ -10,9 +11,12 @@ import { useContext } from 'react';
 
 const Dashboard = () => {
     
+    const user = useContext(AuthedUserContext)
+
     return (
         <main>
             <h1>Welcom to your Dashboard {user.username}</h1>
+
         </main>
     );
 

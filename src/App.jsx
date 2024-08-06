@@ -20,7 +20,7 @@ export const AuthedUserContext = createContext(null);
 
 const App = () => {
 
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(authService.getUser())
 
   const handleSignout = () => {
     authService.signout()

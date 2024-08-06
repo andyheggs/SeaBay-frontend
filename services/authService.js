@@ -47,4 +47,12 @@ const signout = () => {
     localStorage.removeItem("token")
 }
 
-export {signup, signin, signout}
+const getUser = () => {
+    const token = localStorage.getItem("token")
+    if (!token) return null
+    const user = JSON.parse(atob(token.split(".")[1]))
+    console.log(user)
+    return user.user
+}
+
+export {signup, signin, signout, getUser}
