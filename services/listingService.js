@@ -1,5 +1,3 @@
-// import { getToken } from './authService.js';
-
 const BACKEND_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/listings`;
 
 // * -------------------------------------FETCH ALL LISTINGS-------------------------------------//
@@ -12,9 +10,6 @@ export const getAllListings = async () => {
     const res = await fetch(BACKEND_URL, {
 
       headers: {
-
-        // Add Auth header and bearer token from getToken()
-        Authorization: `Bearer ${getToken()}`,
 
         // Specify content type as JSON
         'Content-Type': 'application/json',
@@ -51,11 +46,8 @@ export const getListingById = async (listingId) => {
     // fetch a single listing with GET request to BACKEND_URL with the specific listingId  
     const res = await fetch(`${BACKEND_URL}/${listingId}`, {
       
-      headers: {
-        
-        // Add Auth header with bearer token obtained from getToken()
-        Authorization: `Bearer ${getToken()}`,
-        
+      headers: {        
+    
         // Specifying content type as JSON
         'Content-Type': 'application/json',
       },
@@ -91,9 +83,6 @@ export const createListing = async (formData) => {
       
       headers: {
 
-        // Adding Authorisation header with a bearer token obtained from getToken()
-        Authorization: `Bearer ${getToken()}`,
-
         // Specify content as JSON
         'Content-Type': 'application/json',
       },
@@ -120,42 +109,84 @@ export const createListing = async (formData) => {
 };
 
 // * -------------------------------------UPDATE LISTING-------------------------------------//
+
 export const updateListing = async (listingId, formData) => {
+
+  // try block to handle potential errors
   try {
+
+    // update an existing listing with PUT req to  BACKEND_URL with the specific listingId 
     const res = await fetch(`${BACKEND_URL}/${listingId}`, {
+
+      // Set HTTP method to PUT
       method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-        'Content-Type': 'application/json',
+
+      headers: { 
+        // Specify content type as JSON
+        'Content-Type': 'application/json' 
       },
+
+      // Converting formData into a JSON string for req body
       body: JSON.stringify(formData),
+
     });
+
+    // Parse response as JSON
     const data = await res.json();
+
+    // Throw new err message
     if (data.error) throw new Error(data.error);
+
+    // Return parsed data if no errors 
     return data;
+
   } catch (error) {
+    // Logging errors to console
     console.log(error);
+
+    // Throw new Error 
     throw new Error(error);
   }
 };
 
 // * -------------------------------------DELETE LISTINGS-------------------------------------//
+
 export const deleteListing = async (listingId) => {
+
+  // try block to handle potential errors
   try {
+
+    // delete a listing with DELETE req to BACKEND_URL with the specific listingId  
     const res = await fetch(`${BACKEND_URL}/${listingId}`, {
+
+      // Set HTTP method to DELETE
       method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-        'Content-Type': 'application/json',
+
+      headers: { 
+        // Specify content type as JSON
+        'Content-Type': 'application/json' 
       },
+
     });
+
+    // Check response status is not 204 (No Content)
     if (res.status !== 204) {
+      
+      // Parse response as JSON
       const data = await res.json();
+
+      // throw ew err with  message
       if (data.error) throw new Error(data.error);
     }
+
+    // Return nothing if deletion is successful
     return;
+
   } catch (error) {
+    // Log err to console
     console.log(error);
+
+    // Throw  new Error 
     throw new Error(error);
   }
 };
