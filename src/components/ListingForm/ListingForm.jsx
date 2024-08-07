@@ -77,6 +77,10 @@ const ListingForm = () => {
 
   };
 
+  const handleImageUpload = (value) => {
+    setFormData({ ...formData, vesselImage: value })
+    }
+
   //---------------------------------- * FORM SUBMISSION ------------------------------------------------//
   // Func. to handle form submission
   const handleSubmit = (evt) => {
@@ -276,7 +280,7 @@ const ListingForm = () => {
           value={formData.description}
           onChange={handleChange}
         />
-        {/* Field for entering Description */}
+        {/* Field for entering additional info*/}
         <label htmlFor="additionalInfo-input">Additional Info</label>
         <textarea
           name="additionalInfo"
@@ -284,6 +288,16 @@ const ListingForm = () => {
           value={formData.additionalInfo}
           onChange={handleChange}
         />
+
+        {/* Field for image upload */}
+        <div>          
+          <ImageUpload
+            name="vesselImage"
+            label="Vessel Image"
+            vesselImage={formData.vesselImage} 
+            handleImageUpload={handleImageUpload}
+          />
+        </div>
 
         <button type="submit">SUBMIT</button>
 
