@@ -105,7 +105,7 @@ const Dashboard = () => {
                                     <p>Make: {displayedListing.make}</p>
                                     <p>Model: {displayedListing.model}</p>
                                     <p>Price: £{displayedListing.price}</p>
-                                    <Link to={`/listing/${displayedListing._id}/edit`}><div>EDIT LISTING</div></Link>
+                                    <Link to={`/listings/${displayedListing._id}/edit`}><div>EDIT LISTING</div></Link>
                                     <button onClick={() => {listingService.deleteListing(displayedListing._id)}}>DELETE LISTING</button>
                                 </article>
                             }

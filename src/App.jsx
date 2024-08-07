@@ -35,6 +35,7 @@ const App = () => {
       {(user)?(<>
       <Route path="/profiles/:userId/dashboard" element={<Dashboard/>}></Route>
       <Route path="/listings/create" element={<ListingForm/>}></Route>
+      <Route path="/listings/:listingId/edit" element={<ListingForm/>}></Route>
       </>):(<></>)}
       <Route path="/" element={<Landing/>}></Route>
       <Route path="/profiles/signin" element={<SigninForm setUser={setUser}/>}></Route>

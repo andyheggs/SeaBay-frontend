@@ -114,7 +114,7 @@ export const updateListing = async (listingId, formData) => {
 
   // try block to handle potential errors
   try {
-
+    
     // update an existing listing with PUT req to  BACKEND_URL with the specific listingId 
     const res = await fetch(`${BACKEND_URL}/${listingId}`, {
 
@@ -123,7 +123,8 @@ export const updateListing = async (listingId, formData) => {
 
       headers: { 
         // Specify content type as JSON
-        'Content-Type': 'application/json' 
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem("token")}`
       },
 
       // Converting formData into a JSON string for req body
