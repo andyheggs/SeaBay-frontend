@@ -19,21 +19,49 @@ const Dashboard = () => {
 
     const [offers, setOffers] = useState([])
 
-    useEffect(() => {
-        const populateListings = (userListings) => { userListings.map((listingId) => { listingService.getListingById(listingId) }) }
-        const populateOffers = (listingOffers) => { listingOffers.map((offerId) => { offerService.getOfferFromId(offerId) }) }
-        if (!user.listings.length === 0) {
-            setListings(populateListings(listings))
-            setOffers(populateOffers(offers))
-        }
-    }, [])
-
-    const [overview, setOverview] = useState(true)
-
-    const toggleOverview = () => {
-        setOverview((overview)?overview = false : overview=true)
+    const populateListings = async (userListings) => {
+        const returnValue = userListings.map(async (listingId) => {
+            const returnValue = await listingService.getListingById(listingId)
+            return returnValue
+        })
+        return Promise.all(returnValue)
+    }
+    
+    const populateOffers = async (userOffers) => {
+        const returnValue = userOffers.map(async (offerId) => {
+            const returnValue = await offerService.getOfferFromId(offerId)
+            return returnValue
+        })
+        return Promise.all(returnValue)
     }
 
+    useEffect(() => {
+        const getListings = async () => { 
+        console.log("effect", user.listings.length)
+        if (user.listings.length > 0) {
+            console.log("Runnign", user.listings)
+            setListings(await populateListings(user.listings))
+            console.log("Listing", listings)
+        }
+    }
+    const getOffers = async () => { 
+        console.log("effect", user.offers.length)
+        if (user.offers.length > 0) {
+            console.log("Runnign", user.offers)
+            setOffers(await populateOffers(user.offers))
+            console.log("Listing", offers)
+        }
+    }
+    getListings()
+        getOffers()
+    }, [])
+
+    let [overview, setOverview] = useState(true)
+
+    const toggleOverview = () => {
+        setOverview((overview) ? overview = false : overview = true)
+    }
+    console.log("listings len", listings)
     return (
         <main>
             <h1>Welcom to your Dashboard {user.username}</h1>
@@ -45,29 +73,45 @@ const Dashboard = () => {
                     <h2 onClick={toggleOverview}>Your Offers</h2>
                 </div>
             </header>
-            <h1>{overview}</h1>
-            <div>
-                <h3>Your Listings</h3>
-                <div id="userListingsContainer">
-                    {(listings.length === 0) ?
-                        <p>Looks like you don't have any listings. <Link to="/listings/create">CREATE LISTING</Link></p> :
-                        user.listings.map(() => {
-                            return
-                            // ! Needs code for the item layout 
-                        })}
-                </div>
-            </div>
-            <div>
-                <h3>Current Offers</h3>
+            <h1>Over - {String(overview)}</h1>
+            {(overview) ?
                 <div>
-                    {(offers.length === 0) ?
+                    <div>
+                        <h3>Your Listings</h3>
+                        <div id="userListingsContainer">
+                            {(!listings.length > 0) ?
+                                <p>Looks like you don't have any listings. <Link to="/listings/create">CREATE LISTING</Link></p>
+                                :
+                                listings.map((listing) => {
+                                    return <p>{listing.boatName}</p>
+                                    // ! Needs code for the item layout 
+                                })}
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Current Offers</h3>
+                        {/* <div>
+                    {(listings.offers.length === 0) ?
                         <p>Looks like you don't have any Offers on this listing.</p> :
                         user.offers.map(() => {
                             return
                             //  ! IHAVE NO IDEAS FOR THE CODE THAT NEED TO GO HERE I'LL DEAL WITH IT LATER
                         })}
+                </div> */}
+                    </div>
                 </div>
-            </div>
+                :
+                <div>
+                    <h3>Your Offers</h3>
+                    {(offers.length > 0) ?
+                        <p>Looks like you don't have any offers.</p>
+                        :
+                        offers.map((offer) => {
+                            <div>
+                                <h5>Offer For {offer}</h5>
+                            </div>
+                        })}
+                </div>}
         </main>
     )
 }
