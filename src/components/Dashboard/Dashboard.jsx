@@ -19,6 +19,8 @@ const Dashboard = () => {
 
     const [offers, setOffers] = useState([])
 
+    const [displayedListing, setDisplayedListing] = useState("Loading")
+
     const populateListings = async (userListings) => {
         const returnValue = userListings.map(async (listingId) => {
             const returnValue = await listingService.getListingById(listingId)
@@ -26,7 +28,7 @@ const Dashboard = () => {
         })
         return Promise.all(returnValue)
     }
-    
+
     const populateOffers = async (userOffers) => {
         const returnValue = userOffers.map(async (offerId) => {
             const returnValue = await offerService.getOfferFromId(offerId)
@@ -36,23 +38,23 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        const getListings = async () => { 
-        console.log("effect", user.listings.length)
-        if (user.listings.length > 0) {
-            console.log("Runnign", user.listings)
-            setListings(await populateListings(user.listings))
-            console.log("Listing", listings)
+        const getListings = async () => {
+            console.log("effect", user.listings.length)
+            if (user.listings.length > 0) {
+                console.log("Runnign", user.listings)
+                setListings(await populateListings(user.listings))
+                console.log("Listing", listings)
+            }
         }
-    }
-    const getOffers = async () => { 
-        console.log("effect", user.offers.length)
-        if (user.offers.length > 0) {
-            console.log("Runnign", user.offers)
-            setOffers(await populateOffers(user.offers))
-            console.log("Listing", offers)
+        const getOffers = async () => {
+            console.log("effect", user.offers.length)
+            if (user.offers.length > 0) {
+                console.log("Runnign", user.offers)
+                setOffers(await populateOffers(user.offers))
+                console.log("Listing", offers)
+            }
         }
-    }
-    getListings()
+        getListings()
         getOffers()
     }, [])
 
@@ -82,28 +84,54 @@ const Dashboard = () => {
                             {(!listings.length > 0) ?
                                 <p>Looks like you don't have any listings. <Link to="/listings/create">CREATE LISTING</Link></p>
                                 :
-                                listings.map((listing) => {
-                                    return <p>{listing.boatName}</p>
-                                    // ! Needs code for the item layout 
+                                listings.map(listing => {
+                                    return (
+                                        <div onClick={() => { setDisplayedListing(listing) }}>
+                                            <h5>{listing.boatName}</h5>
+                                        </div>
+                                    );
+
                                 })}
+                            {(displayedListing === "Loading") ?
+                                <p>Loading Content</p>
+                                :
+                                <article>
+                                    <header>
+                                        <h2>{displayedListing.boatName}</h2>
+                                        <p>
+                                            {displayedListing.seller.username} posted on {new Date(displayedListing.listingCreated).toLocaleDateString()}
+                                        </p>
+                                    </header>
+                                    <p>Make: {displayedListing.make}</p>
+                                    <p>Model: {displayedListing.model}</p>
+                                    <p>Price: £{displayedListing.price}</p>
+                                    <Link to={`/listing/${displayedListing._id}/edit`}><div>EDIT LISTING</div></Link>
+                                    <button onClick={() => {listingService.deleteListing(displayedListing._id)}}>DELETE LISTING</button>
+                                </article>
+                            }
                         </div>
                     </div>
                     <div>
                         <h3>Current Offers</h3>
-                        {/* <div>
-                    {(listings.offers.length === 0) ?
-                        <p>Looks like you don't have any Offers on this listing.</p> :
-                        user.offers.map(() => {
-                            return
-                            //  ! IHAVE NO IDEAS FOR THE CODE THAT NEED TO GO HERE I'LL DEAL WITH IT LATER
-                        })}
-                </div> */}
+                        {(displayedListing === "Loading") ?
+                            <p>Loading Content</p>
+                            :
+                            <article>
+                                {(displayedListing.offers.length > 0) ?
+                                    displayedListing.offers.map(() => {
+                                        return <p>blah</p>
+                                    })
+                                    :
+                                    <p>No Offers On This Listing</p>
+                                }
+                            </article>
+                        }
                     </div>
                 </div>
                 :
                 <div>
                     <h3>Your Offers</h3>
-                    {(offers.length > 0) ?
+                    {(!offers.length > 0) ?
                         <p>Looks like you don't have any offers.</p>
                         :
                         offers.map((offer) => {

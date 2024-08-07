@@ -7,7 +7,7 @@ import { useState, use } from 'react'
 import { AuthedUserContext } from '../../App'
 import "./Navbar.css"
 //import to enable boat placeholder on profile navbar if needed
-import profilePlaceholder from '../../assets/profile-image-placeholder.jpg'
+// import profilePlaceholder from '../../assets/profile-image-placeholder.jpg'
 //--------------------------------------------Service Imports----------------------------------------------//
 
 //--------------------------------------------Document Imports----------------------------------------------//
@@ -28,7 +28,7 @@ const Navbar = (props) => {
 
     // Assign profile image to either the user's profile image or default placeholder image.
     // If user.profileImage is not available, profilePlaceholder will be used instead.
-    const profileImage = user?.profileImage || profilePlaceholder
+    // const profileImage = user?.profileImage || profilePlaceholder
 
     return (
         <div>
@@ -48,7 +48,7 @@ const Navbar = (props) => {
                         <li>
                             {/* div displays user's profile image in navbar */}
                             {/* backgroundImage style dynamically sets the image URL to either user's profile image or placeholder */}
-                        <div className='profile-image' style={{ backgroundImage: `url(${profileImage})` }}></div>
+                        {/* <div className='profile-image' style={{ backgroundImage: `url(${profileImage})` }}></div> */}
                         </li>
                     </ul>
                 </div>:
