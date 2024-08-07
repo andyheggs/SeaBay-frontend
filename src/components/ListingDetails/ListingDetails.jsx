@@ -6,7 +6,11 @@ import { useParams } from 'react-router-dom'
 
 
 //--------------------------------------------Service Imports----------------------------------------------//
+<<<<<<< HEAD
+import * as listingService from '../../../services/listingService'
+=======
 import listingService from '../../../services/listingService'
+>>>>>>> f5d490dfcb667526f1a3d2a0e0f83306a32465b5
 
 // * LISTING DETAILS COMPONENT //
 

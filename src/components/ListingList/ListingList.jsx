@@ -11,7 +11,7 @@ const ListingList = ({ listings }) => {
   return (
 
     <main>
-      {/* Iterate over the listings array and render each listing */}
+      {/* Iterate over listings array and render each listing */}
 
       {listings.map(listing => {
 
@@ -24,7 +24,7 @@ const ListingList = ({ listings }) => {
 
               <header>
 
-                {/* Display the boat name as the title */}
+                {/* Display boat name as the title */}
                 <h2>{listing.boatName}</h2>
 
                 <p>
