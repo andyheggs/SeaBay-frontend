@@ -26,13 +26,18 @@ const App = () => {
     setUser(null)
   }
 
+  const handleDelete = (listingId) => {
+    listingService.deleteListing(listingId)
+    setUser(user.listings.splice(user.listings.index(listingId), 1) )
+  }
+
   return (
     // Creates context so we can use create context on the user value
   <AuthedUserContext.Provider value={user}>
     <Navbar handleSignout={handleSignout}/>
     <Routes>
       {(user)?(<>
-      <Route path="/profiles/:userId/dashboard" element={<Dashboard/>}></Route>
+      <Route path="/profiles/:userId/dashboard" element={<Dashboard handleDelete={handleDelete}/>}></Route>
       <Route path="/listings/create" element={<ListingForm/>}></Route>
       <Route path="/listings/:listingId/edit" element={<ListingForm/>}></Route>
       </>):(<></>)}
