@@ -14,7 +14,6 @@ import ListingForm from './components/ListingForm/ListingForm';
 
 //-----------------------------------------------Service Imports-----------------------------------------//
 import * as authService from '../services/authService';
-import * as listingService from '../services/listingService';
 
 export const AuthedUserContext = createContext(null);
 
