@@ -2,9 +2,9 @@
 import { useState, useEffect } from 'react'  
 import { useParams } from 'react-router-dom'
 //-------------------------------------------Component Imports---------------------------------------------//
-
+import ImageUpload from '../ImageUpload/ImageUpload'
 //--------------------------------------------Service Imports----------------------------------------------//
-import * as listingService from '../../services/listingService'
+import * as listingService from '../../../services/listingService'
 
 // Define ListingForm component with props handleAddListing and handleUpdateListing
 const ListingForm = ({ handleAddListing, handleUpdateListing }) => {  
@@ -12,7 +12,9 @@ const ListingForm = ({ handleAddListing, handleUpdateListing }) => {
   // set state for formData 
   const [formData, setFormData] = useState({
 
+    //default value set for drop down
     category: 'Motor',
+    //default value set for drop down
     hullType: 'Monohull',
     make: '',
     model: '',
@@ -27,6 +29,8 @@ const ListingForm = ({ handleAddListing, handleUpdateListing }) => {
     description: '',
     price: '',
     additionalInfo: '',
+    //new field to add image
+    vesselImage: '', 
 
   });
 
@@ -62,7 +66,9 @@ const ListingForm = ({ handleAddListing, handleUpdateListing }) => {
     }
 
     // Dependency array with listingId -  rerun if listingId if changes
-    }, [listingId])  
+    }, [listingId]) 
+    
+  //---------------------------------- * HANDLE FORM CHANGES ------------------------------------------------//
 
   // Func. to handle form field changes and update formData state
   const handleChange = (evt) => {
@@ -71,6 +77,7 @@ const ListingForm = ({ handleAddListing, handleUpdateListing }) => {
 
   };
 
+  //---------------------------------- * FORM SUBMISSION ------------------------------------------------//
   // Func. to handle form submission
   const handleSubmit = (evt) => {
 
@@ -100,6 +107,7 @@ const ListingForm = ({ handleAddListing, handleUpdateListing }) => {
     }
   }
 
+  //---------------------------------- * FORM FIELDS ------------------------------------------------//
   return (
 
     <main>
@@ -285,6 +293,6 @@ const ListingForm = ({ handleAddListing, handleUpdateListing }) => {
   );
 };
 
-//--------------------------------------------Service Imports----------------------------------------------//
+//--------------------------------------------EXPORT STATEMENT----------------------------------------------//
 export default ListingForm;
 
