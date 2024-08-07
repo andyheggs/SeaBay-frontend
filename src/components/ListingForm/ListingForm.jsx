@@ -7,7 +7,7 @@ import ImageUpload from '../ImageUpload/ImageUpload'
 import * as listingService from '../../../services/listingService'
 
 // Define ListingForm component with props handleAddListing and handleUpdateListing
-const ListingForm = () => {  
+const ListingForm = ({handleAddListing, handleUpdateListing}) => {  
 
   // set state for formData 
   const [formData, setFormData] = useState({
@@ -103,11 +103,11 @@ const ListingForm = () => {
     // If listingId exists, update listing, otherwise add new listing
     if (listingId) {
 
-      listingService.updateListing(listingId, dataToSubmit)
+      handleUpdateListing(listingId, dataToSubmit)
 
     } else {
 
-      listingService.createListing(dataToSubmit)
+      handleAddListing(dataToSubmit)
     }
   }
 

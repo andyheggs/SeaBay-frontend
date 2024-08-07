@@ -34,7 +34,7 @@ const App = () => {
   const handleAddListing = async (formData) => {
 
     try {
-
+        console.log("F log of hell", formData)
       // Create the listing
       const newListing = await listingService.createListing(formData)
 
