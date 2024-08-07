@@ -85,6 +85,7 @@ export const createListing = async (formData) => {
 
         // Specify content as JSON
         'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem("token")}`
       },
       // Converting formData into a JSON string for the request body
       body: JSON.stringify(formData),
@@ -165,7 +166,8 @@ export const deleteListing = async (listingId) => {
 
       headers: { 
         // Specify content type as JSON
-        'Content-Type': 'application/json' 
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem("token")}`
       },
 
     });
