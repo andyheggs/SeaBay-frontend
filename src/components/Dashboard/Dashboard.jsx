@@ -11,7 +11,7 @@ import * as listingService from '../../../services/listingService'
 
 
 
-const Dashboard = () => {
+const Dashboard = ({handleDelete}) => {
 
     const user = useContext(AuthedUserContext)
 
@@ -23,6 +23,7 @@ const Dashboard = () => {
 
     const populateListings = async (userListings) => {
         const returnValue = userListings.map(async (listingId) => {
+            console.log("id", listingId)
             const returnValue = await listingService.getListingById(listingId)
             return returnValue
         })
@@ -106,7 +107,7 @@ const Dashboard = () => {
                                     <p>Model: {displayedListing.model}</p>
                                     <p>Price: £{displayedListing.price}</p>
                                     <Link to={`/listings/${displayedListing._id}/edit`}><div>EDIT LISTING</div></Link>
-                                    <button onClick={() => {listingService.deleteListing(displayedListing._id)}}>DELETE LISTING</button>
+                                    <button onClick={() => {handleDelete(displayedListing._id)}}>DELETE LISTING</button>
                                 </article>
                             }
                         </div>
