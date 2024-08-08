@@ -6,14 +6,15 @@
 
 .listing-list .listing-item {
     background: #fff;
-    width: calc(33.333% - 20px);
+    width: calc(50% - 20px); /* Adjusting width for two items per row with space between */
     margin-bottom: 20px;
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
 }
 
 .listing-list .listing-item img {
@@ -24,10 +25,18 @@
 
 .listing-list .listing-item h3 {
     margin-bottom: 10px;
+    text-align: center; /* Center the title */
 }
 
 .listing-list .listing-item .price {
     color: #007bff;
     font-size: 1.2em;
     margin-top: auto;
+    text-align: center; /* Center the price */
+}
+
+@media (max-width: 768px) {
+    .listing-list .listing-item {
+        width: 100%; /* On smaller screens, each item takes full width */
+    }
 }
