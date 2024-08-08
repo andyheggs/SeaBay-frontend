@@ -2,6 +2,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import './Dashboard.css'
 //-------------------------------------------Component Imports---------------------------------------------//
 import { AuthedUserContext } from '../../App'
 import * as offerService from "../../../services/offerService"

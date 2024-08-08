@@ -1,0 +1,21 @@
+.landing {
+    text-align: center;
+    padding: 50px 20px;
+    background: url('/path/to/your/background/image.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+}
+
+.landing h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.landing p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+}
+
+.landing button {
+    font-size: 1.2em;
+}

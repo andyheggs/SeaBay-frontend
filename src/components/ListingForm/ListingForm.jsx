@@ -1,6 +1,8 @@
 //---------------------------------------------React Imports-----------------------------------------------//
 import { useState, useEffect } from 'react'  
 import { useParams } from 'react-router-dom'
+
+import './ListingForm.css'
 //-------------------------------------------Component Imports---------------------------------------------//
 import ImageUpload from '../ImageUpload/ImageUpload'
 //--------------------------------------------Service Imports----------------------------------------------//

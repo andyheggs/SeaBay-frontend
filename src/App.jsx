@@ -2,6 +2,7 @@
 import { useState, useEffect, createContext } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 
+import './App.css'
 //---------------------------------------------Componenet Imports-----------------------------------------//
 import Navbar from './components/Navbar/Navbar'
 import Landing from './components/Landing/Landing'
@@ -12,6 +13,8 @@ import ListingList from './components/ListingList/ListingList'
 import ListingDetails from './components/ListingDetails/ListingDetails'
 import ListingForm from './components/ListingForm/ListingForm'
 import OfferForm from './components/OfferForm/OfferForm'
+
+
 
 //-----------------------------------------------Service Imports-----------------------------------------//
 import * as authService from '../services/authService'

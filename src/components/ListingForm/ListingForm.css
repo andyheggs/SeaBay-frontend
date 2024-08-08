@@ -1,0 +1,14 @@
+.listing-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-form input,
+.listing-form select,
+.listing-form textarea {
+    margin-bottom: 15px;
+}
+
+.listing-form button {
+    align-self: flex-end;
+}

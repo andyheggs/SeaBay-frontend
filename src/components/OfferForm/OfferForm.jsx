@@ -1,6 +1,8 @@
 //---------------------------------------------React Imports-----------------------------------------------//
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+
+import './OfferForm.css'
 //--------------------------------------------Service Imports----------------------------------------------//
 import * as offerService from '../../../services/offerService'
 
