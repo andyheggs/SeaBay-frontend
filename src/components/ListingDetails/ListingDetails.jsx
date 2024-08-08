@@ -14,7 +14,7 @@ import * as listingService from '../../../services/listingService'
 const ListingDetails = () => {
 
     //Intialise 'id' from URL params    
-    const { id } = useParams()
+    const { listingId } = useParams()
 
     //set state for lisitng
     const [listing, setListing] = useState(null)
@@ -31,7 +31,7 @@ const ListingDetails = () => {
             try {
 
             //call backend to retrieve listing by id
-            const data = await listingService.getListingById(id)
+            const data = await listingService.getListingById(listingId)
 
             //update listing state with fetched data
             setListing(data)
@@ -48,7 +48,7 @@ const ListingDetails = () => {
     //intiate data fetch call
     fetchListing();
     
-    },[id])
+    },[listingId])
 
     // * COMPONENT RENDERING //
 
@@ -80,7 +80,7 @@ const ListingDetails = () => {
 
                     <p>Age: {listing.age} years</p>
 
-                    <p>Location: {`${listing.location_street}, ${listing.location_city}, ${listing.location_state}, ${listing.location_postcode}, ${listing.location_country}`}</p>
+                    <p>Location: {`${listing.location.street}, ${listing.location.city}, ${listing.location.state}, ${listing.location.postcode}, ${listing.location.country}`}</p>
 
                     <p>Price: £{listing.price}</p>
 

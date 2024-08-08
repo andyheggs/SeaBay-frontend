@@ -11,7 +11,7 @@ import * as listingService from '../../../services/listingService'
 
 
 
-const Dashboard = ({handleDelete}) => {
+const Dashboard = ({ handleDelete }) => {
 
     const user = useContext(AuthedUserContext)
 
@@ -24,7 +24,7 @@ const Dashboard = ({handleDelete}) => {
     const populateListings = async (userListings) => {
         const returnValue = userListings.map(async (listingId) => {
             console.log("id", listingId)
-            const returnValue = await listingService.getListingById(listingId)
+            const returnValue = await listingService.getListingById(listingId._id)
             return returnValue
         })
         return Promise.all(returnValue)
@@ -32,6 +32,7 @@ const Dashboard = ({handleDelete}) => {
 
     const populateOffers = async (userOffers) => {
         const returnValue = userOffers.map(async (offerId) => {
+            console.log("OFFEROEid", offerId)
             const returnValue = await offerService.getOfferFromId(offerId)
             return returnValue
         })
@@ -40,6 +41,7 @@ const Dashboard = ({handleDelete}) => {
 
     useEffect(() => {
         const getListings = async () => {
+            console.log("TPYOT", user)
             console.log("effect", user.listings.length)
             if (user.listings.length > 0) {
                 console.log("Runnign", user.listings)
@@ -48,15 +50,18 @@ const Dashboard = ({handleDelete}) => {
             }
         }
         const getOffers = async () => {
+            console.log("TPYOT", user)
             console.log("effect", user.offers.length)
             if (user.offers.length > 0) {
                 console.log("Runnign", user.offers)
                 setOffers(await populateOffers(user.offers))
                 console.log("Listing", offers)
             }
+
         }
         getListings()
-        getOffers()
+        // ! DISABLED UNTIL OFFER STUFF IS ADDED AS I CBA 
+        // getOffers()
     }, [])
 
     let [overview, setOverview] = useState(true)
@@ -107,7 +112,7 @@ const Dashboard = ({handleDelete}) => {
                                     <p>Model: {displayedListing.model}</p>
                                     <p>Price: £{displayedListing.price}</p>
                                     <Link to={`/listings/${displayedListing._id}/edit`}><div>EDIT LISTING</div></Link>
-                                    <button onClick={() => {handleDelete(displayedListing._id)}}>DELETE LISTING</button>
+                                    <button onClick={() => { handleDelete(displayedListing._id) }}>DELETE LISTING</button>
                                 </article>
                             }
                         </div>

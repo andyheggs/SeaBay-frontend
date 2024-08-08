@@ -20,7 +20,16 @@ export const AuthedUserContext = createContext(null);
 
 const App = () => {
 
-  const [user, setUser] = useState(authService.getUser())
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const runGetUser = async () => {
+      const returnedUser =  await authService.getUser()
+
+      setUser(returnedUser)
+    }
+    runGetUser()
+  }, [])
 
   const handleSignout = () => {
     authService.signout()
