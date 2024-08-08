@@ -1,0 +1,28 @@
+.listing-details {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.listing-details img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.listing-details h2 {
+    margin-bottom: 10px;
+}
+
+.listing-details p {
+    margin-bottom: 10px;
+}
+
+.listing-details .price {
+    font-size: 1.5em;
+    color: #007bff;
+    margin-top: 20px;
+}

@@ -1,28 +1,28 @@
 //---------------------------------------------React Imports-----------------------------------------------// 
-import { useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useState, use } from 'react'
+import { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 //-------------------------------------------Component Imports---------------------------------------------//
-import { AuthedUserContext } from '../../App'
-import "./Navbar.css"
+import { AuthedUserContext } from '../../App';
+import "./Navbar.css";
 
 //--------------------------------------------Service Imports----------------------------------------------//
 
 //--------------------------------------------Document Imports----------------------------------------------//
-const burgerElement = document.getElementById("DropDownContainer")
+const burgerElement = document.getElementById("DropDownContainer");
 
 const Navbar = (props) => {
 
     // gets the user value from the Context in app.jsx
-    const user = useContext(AuthedUserContext)
+    const user = useContext(AuthedUserContext);
 
     // holds Display value for the drop down menu 
-    const [burgerToggle, setBurgerToggle] = useState("none")
+    const [burgerToggle, setBurgerToggle] = useState("none");
 
     // toggles gurgerToggle between "none" and "display"
     const toggleBurger = () => {
-        setBurgerToggle((burgerToggle === "none") ? "block" : "none")
+        setBurgerToggle((burgerToggle === "none") ? "block" : "none");
     }
 
     return (
@@ -44,36 +44,20 @@ const Navbar = (props) => {
                 </div>:
                 <div>
                     <ul>
-                    <li><Link to="/">Home</Link></li>
-                        <li>
-                            <Link to="/profiles/signin">Sign In</Link>
-                        </li>
-                        <li>
-                            <Link to="/profiles/signup">Sign Up</Link>
-                        </li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/profiles/signin">Sign In</Link></li>
+                        <li><Link to="/profiles/signup">Sign Up</Link></li>
                     </ul>
                 </div>}
             </div>
+            {/* Standalone link for Boat Listings */}
+            <div className="standalone-link">
+                <Link to="/listings">Boat Listings</Link>
+            </div>
         </div>
     )
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //------------------------------------------------Exports--------------------------------------------------//
 
-export default Navbar
+export default Navbar;

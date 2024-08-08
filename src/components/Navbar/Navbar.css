@@ -2,3 +2,24 @@
     background-color: grey;
     display: none;
 }
+
+.navbar {
+    background-color: #007bff;
+    padding: 15px;
+    color: #fff;
+}
+
+.navbar a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.navbar .brand {
+    font-size: 1.5em;
+}

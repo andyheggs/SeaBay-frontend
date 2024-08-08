@@ -1,0 +1,23 @@
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.signin-form h2 {
+    margin-bottom: 20px;
+}
+
+.signin-form input {
+    margin-bottom: 15px;
+}
+
+.signin-form button {
+    width: 100%;
+}

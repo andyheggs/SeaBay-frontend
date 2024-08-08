@@ -2,6 +2,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import './Dashboard.css'
 //-------------------------------------------Component Imports---------------------------------------------//
 import { AuthedUserContext } from '../../App'
 import * as offerService from "../../../services/offerService"
@@ -83,7 +84,7 @@ const Dashboard = ({ handleDelete }) => {
     console.log("listings len", listings)
     return (
         <main>
-            <h1>Welcom to your Dashboard {user.username}</h1>
+            <h1>Welcome to your Dashboard {user.username}</h1>
             <header>
                 <div>
                     <h2 onClick={toggleOverview}>Your Listings</h2>

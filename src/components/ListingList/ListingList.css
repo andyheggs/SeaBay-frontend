@@ -1,0 +1,33 @@
+.listing-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.listing-list .listing-item {
+    background: #fff;
+    width: calc(33.333% - 20px);
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.listing-list .listing-item img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.listing-list .listing-item h3 {
+    margin-bottom: 10px;
+}
+
+.listing-list .listing-item .price {
+    color: #007bff;
+    font-size: 1.2em;
+    margin-top: auto;
+}

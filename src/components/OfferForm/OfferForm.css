@@ -1,0 +1,13 @@
+.offer-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.offer-form input,
+.offer-form textarea {
+    margin-bottom: 15px;
+}
+
+.offer-form button {
+    align-self: flex-end;
+}
