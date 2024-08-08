@@ -36,6 +36,9 @@ const App = () => {
     try {
         console.log("F log of hell", formData)
       // Create the listing
+
+      console.log(user)
+
       const newListing = await listingService.createListing(formData)
 
       // Updating user's listings
