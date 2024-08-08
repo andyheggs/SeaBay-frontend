@@ -12,7 +12,7 @@ const ListingList = ({ listings }) => {
 
   return (
 
-    <main>
+    <main className='listing-list'>
       {/* Iterate over listings array and render each listing */}
 
       {listings.map(listing => {
@@ -24,7 +24,7 @@ const ListingList = ({ listings }) => {
         return (
 
           // Each listing is wrapped in a Link component for navigation
-          <Link key={listing._id} to={`/listings/${listing._id}`}>
+          <Link key={listing._id} to={`/listings/${listing._id}`} className='listing-item'>
 
             <article>
 

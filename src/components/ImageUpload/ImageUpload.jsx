@@ -37,11 +37,11 @@ const ImageUpload = ({ name, label, vesselImage, handleImageUpload, setMessage }
       {/* If profileImage has been uploaded and set to state, display this instead of file input */}
       { vesselImage ?
         <div 
-          className="vessel-image" 
-          style={{
-            backgroundImage: `url(${vesselImage})`
-          }}
-        ></div>
+          
+          // style={{
+          //   backgroundImage: `url(${vesselImage})`
+          // }}
+        ><img className="vessel-image"  src={vesselImage}></img></div>
         :
         <>
           <label htmlFor={name}>{label}</label>
