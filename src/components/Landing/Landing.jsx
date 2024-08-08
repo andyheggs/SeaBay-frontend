@@ -14,7 +14,7 @@ const Landing = () => {
     
     return (
         <main>
-            <h1>Welcome to the Landing Page</h1>
+            <h1>Welcome to SeaBay!</h1>
         </main>
     );
 
