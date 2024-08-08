@@ -1,10 +1,40 @@
+.listing-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .listing-details {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     padding: 20px;
-    background: #fff;
+    width: 80%;
+    background: rgb(255, 255, 255, 0.55);
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.details-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    padding: 10px;
+}
+
+.details-group p {
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.split-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .listing-details img {
@@ -23,6 +53,17 @@
 
 .listing-details .price {
     font-size: 1.5em;
-    color: #007bff;
     margin-top: 20px;
+    font-weight: bold;
 }
+
+.listing-details span {
+    color: #007bff;
+    font-weight: bolder;
+}
+
+.vessel-image{
+    border: #000 solid, 3px ;
+    margin: 30px;
+  }
+  

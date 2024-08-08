@@ -1,10 +1,11 @@
 //---------------------------------------------React Imports-----------------------------------------------// 
-import {useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom' 
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 
 //-------------------------------------------Component Imports---------------------------------------------//
-
+import ImageUpload from '../ImageUpload/ImageUpload';
+import './ListingDetails.css'
 
 //--------------------------------------------Service Imports----------------------------------------------//
 import * as listingService from '../../../services/listingService'
@@ -24,38 +25,38 @@ const ListingDetails = () => {
     const [error, setError] = useState('')
 
 
-// Use Effect Hook to fetch listing details when component mounts, or id changes
+    // Use Effect Hook to fetch listing details when component mounts, or id changes
     useEffect(() => {
 
         const fetchListing = async () => {
 
             try {
 
-            //call backend to retrieve listing by id
-            const data = await listingService.getListingById(listingId)
+                //call backend to retrieve listing by id
+                const data = await listingService.getListingById(listingId)
 
-            //update listing state with fetched data
-            setListing(data)
+                //update listing state with fetched data
+                setListing(data)
 
-        } catch (error) {
+            } catch (error) {
 
-            console.log(error)
+                console.log(error)
 
-            setError ('Error fetching lisiting details')
+                setError('Error fetching lisiting details')
+            }
+
         }
 
-    }        
-    
-    //intiate data fetch call
-    fetchListing();
-    
-    },[listingId])
+        //intiate data fetch call
+        fetchListing();
+
+    }, [listingId])
 
     // * COMPONENT RENDERING //
 
     return (
 
-        <div>
+        <div className='listing-container'>
 
             {/*Error handling */}
 
@@ -65,43 +66,60 @@ const ListingDetails = () => {
 
             {listing ? (
 
-                <div>
+                <div className='listing-details'>
+
 
                     <h1>{listing.boatName}</h1>
 
-                    <p>Vessel Type: {listing.category}</p>
+                    <img className="vessel-image"  src={listing.vesselImage}></img>
 
-                    <p>Hull Type: {listing.hullType}</p>
+                    <div className='details-group'>
 
-                    <p>Make: {listing.make}</p>
+                        <p className='price'>Price: <span>£{listing.price}</span></p>
 
-                    <p>Model: {listing.model}</p>
+                        <p>Seller:{listing.seller.username}</p>
 
-                    <p>Length: {listing.length} ft</p>
+                    </div>
 
-                    <p>Age: {listing.age} years</p>
+                    <div className='split-div'>
 
-                    <p>Location: {`${listing.location.street}, ${listing.location.city}, ${listing.location.state}, ${listing.location.postcode}, ${listing.location.country}`}</p>
+                        <div className='details-group'>
 
-                    <p>Price: £{listing.price}</p>
+                            <p>Vessel Type: {listing.category}</p>
 
-                    <p>Description: {listing.description}</p>
+                            <p>Hull Type: {listing.hullType}</p>
 
-                    <p>Additional Info:{listing.additionalInfo}</p>
+                            <p>Make: {listing.make}</p>
 
-                    <p>First Advertised:{listing.listingCreated}</p>
+                            <p>Model: {listing.model}</p>
 
-                    <p>Seller:{listing.seller.username}</p>
+                            <p>Length: {listing.length} ft</p>
+
+                        </div><div className='details-group'>
+
+                            <p>Age: {listing.age} years</p>
+
+                            <p>Location: {`${listing.location.street}, ${listing.location.city}, ${listing.location.state}, ${listing.location.postcode}, ${listing.location.country}`}</p>
+
+                            <p>Description: {listing.description}</p>
+
+                            <p>Additional Info: {listing.additionalInfo}</p>
+
+                            <p>First Advertised: {listing.listingCreated.split("T")[0]}</p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
                 /* ....else awaiting data load */
 
-                    ) : (
+            ) : (
 
-                        <p>Loading...</p>
+                <p>Loading...</p>
 
-                    )}
+            )}
 
         </div>
     );

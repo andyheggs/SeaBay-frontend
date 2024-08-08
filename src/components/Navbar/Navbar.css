@@ -1,6 +1,35 @@
-#DropDownContainer {
-    background-color: grey;
-    display: none;
+.DropDownContainer {
+    display: flex;
+            justify-content: flex-end;
+            flex-direction: row-reverse;
+    background-color: rgb(84, 128, 250, 0.8);
+    width: fit-content;
+    align-self: auto;
+    border-radius: 10px;
+    padding:6px;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+}
+
+li {
+    padding: 1px;
+    list-style-type: none;
+}
+
+span {
+    font-weight: 800;
+    font-size: medium;
+    color: #333;
+    text-shadow: 1px 1px 3px aliceblue;
+}
+span:hover {
+    color:aliceblue;
+    text-shadow: 2px 2px 5px #333;
+}
+
+.HamBurger {
+    position: relative;
 }
 
 .navbar {
