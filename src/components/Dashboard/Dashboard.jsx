@@ -64,6 +64,17 @@ const Dashboard = ({ handleDelete }) => {
         // getOffers()
     }, [])
 
+    const deleteFunction = async () => {
+        await handleDelete(displayedListing._id)
+        setDisplayedListing("Loading")
+        setListings([])
+        if (user.listings.length > 0) {
+            console.log("Runnign", user.listings)
+            setListings(await populateListings(user.listings))
+            console.log("Listing", listings)
+        }
+    }
+
     let [overview, setOverview] = useState(true)
 
     const toggleOverview = () => {
@@ -112,7 +123,7 @@ const Dashboard = ({ handleDelete }) => {
                                     <p>Model: {displayedListing.model}</p>
                                     <p>Price: £{displayedListing.price}</p>
                                     <Link to={`/listings/${displayedListing._id}/edit`}><div>EDIT LISTING</div></Link>
-                                    <button onClick={() => { handleDelete(displayedListing._id) }}>DELETE LISTING</button>
+                                    <button onClick={deleteFunction}>DELETE LISTING</button>
                                 </article>
                             }
                         </div>
@@ -123,7 +134,7 @@ const Dashboard = ({ handleDelete }) => {
                             <p>Loading Content</p>
                             :
                             <article>
-                                {(displayedListing.offers.length > 0) ?
+                                {(displayedListing.offers && displayedListing.offers.length > 0) ?
                                     displayedListing.offers.map(() => {
                                         return <p>blah</p>
                                     })

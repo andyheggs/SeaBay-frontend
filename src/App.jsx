@@ -22,12 +22,13 @@ const App = () => {
 
   const [user, setUser] = useState(null)
 
-  useEffect(() => {
-    const runGetUser = async () => {
-      const returnedUser =  await authService.getUser()
+  const runGetUser = async () => {
+    const returnedUser =  await authService.getUser()
 
-      setUser(returnedUser)
-    }
+    setUser(returnedUser)
+  }
+
+  useEffect(() => {
     runGetUser()
   }, [])
 
@@ -78,7 +79,7 @@ const App = () => {
 
   const handleDelete = (listingId) => {
     listingService.deleteListing(listingId)
-    setUser(user.listings.splice(user.listings.index(listingId), 1) )
+    runGetUser()
   }
 
   return (
@@ -91,7 +92,7 @@ const App = () => {
 
             {(user)?(
               <>
-                <Route path="/profiles/:userId/dashboard" element={<Dashboard />} />
+                <Route path="/profiles/:userId/dashboard" element={<Dashboard handleDelete={handleDelete}/>} />
 
                 <Route path="/listings/create" element={<ListingForm handleAddListing={handleAddListing}/>} />
 
