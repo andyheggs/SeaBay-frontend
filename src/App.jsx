@@ -112,9 +112,9 @@ const App = () => {
     }
   }
 
-  const handleDelete = (listingId) => {
-    listingService.deleteListing(listingId)
-    runGetUser()
+  const handleDelete = async (listingId) => {
+    await listingService.deleteListing(listingId)
+    await runGetUser()
   }
 
   const handleAddOffer = async (data) => {

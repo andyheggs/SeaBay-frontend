@@ -63,7 +63,7 @@ const Dashboard = ({ handleDelete }) => {
         getListings()
         // ! DISABLED UNTIL OFFER STUFF IS ADDED AS I CBA 
         // getOffers()
-    }, [])
+    }, [user])
 
     const deleteFunction = async () => {
         await handleDelete(displayedListing._id)
@@ -104,7 +104,7 @@ const Dashboard = ({ handleDelete }) => {
                                 :
                                 listings.map(listing => {
                                     return (
-                                        <div onClick={() => { setDisplayedListing(listing) }}>
+                                        <div key={listing._id} onClick={() => { setDisplayedListing(listing) }}>
                                             <h5>{listing.boatName}</h5>
                                         </div>
                                     );
