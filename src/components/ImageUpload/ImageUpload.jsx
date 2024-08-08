@@ -10,7 +10,7 @@ const ImageUpload = ({ name, label, vesselImage, handleImageUpload, setMessage }
     const file = event.target.files[0]
 
     // Ensure file is within size limit
-    if (file.size > 800000) {
+    if (file.size > 80000000) {
       return setMessage('Image too large. Please select a smaller image (max: 800KB)')
     }
     

@@ -14,6 +14,10 @@ const ListingList = ({ listings }) => {
       {/* Iterate over listings array and render each listing */}
 
       {listings.map(listing => {
+        
+        {/* check if listing.seller exists before trying to access listing.seller.username. 
+          If listing.seller is null, we default to displaying "Unknown Seller". */}
+        const sellerUsername = listing.seller ? listing.seller.username : 'Unknown Seller';
 
         return (
 
@@ -29,7 +33,7 @@ const ListingList = ({ listings }) => {
 
                 <p>
                   {/* Display the seller's username and the posting date */}
-                  {listing.seller.username} posted on {new Date(listing.listingCreated).toLocaleDateString()}
+                  {sellerUsername} posted on {new Date(listing.listingCreated).toLocaleDateString()}
                 </p>
 
               </header>
