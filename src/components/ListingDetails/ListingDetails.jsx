@@ -1,21 +1,24 @@
 //---------------------------------------------React Imports-----------------------------------------------// 
 import {useEffect, useState, useContext } from 'react'
-import { useParams } from 'react-router-dom' 
+import { useParams, useNavigate, Link } from 'react-router-dom' 
 import { AuthedUserContext } from '../../App'
 
 //-------------------------------------------Component Imports---------------------------------------------//
 import './ListingDetails.css'
-
+import OfferForm from '../OfferForm/OfferForm'
 //--------------------------------------------Service Imports----------------------------------------------//
 import * as listingService from '../../../services/listingService'
 import * as offerService from '../../../services/offerService'
 
-// * LISTING DETAILS COMPONENT //
+// -----------------------------------* LISTING DETAILS COMPONENT ----------------------------------------- //
 
 // fetche and display details of a specific listing:
 const ListingDetails = () => {
 
     const user = useContext(AuthedUserContext)
+    
+    // Add navigate hook
+    const navigate = useNavigate() 
 
     //Intialise 'id' from URL params    
     const { listingId } = useParams()
@@ -26,6 +29,9 @@ const ListingDetails = () => {
     //set state for error handling
     const [error, setError] = useState('')
 
+    // Set state to handle offer form visibility
+    const [showOfferForm, setShowOfferForm] = useState(false)
+
 
 // Use Effect Hook to fetch listing details when component mounts, or id changes
     useEffect(() => {
@@ -33,7 +39,6 @@ const ListingDetails = () => {
         const fetchListing = async () => {
 
             try {
-
             //call backend to retrieve listing by id
             const data = await listingService.getListingById(listingId)
 
@@ -41,9 +46,7 @@ const ListingDetails = () => {
             setListing(data)
 
         } catch (error) {
-
             console.log(error)
-
             setError ('Error fetching lisiting details')
         }
 
@@ -54,7 +57,36 @@ const ListingDetails = () => {
     
     },[listingId])
 
-    // * COMPONENT RENDERING //
+    // -----------------------------------* OFFER DETAILS COMPONENT ----------------------------------------- //
+
+    // Function to handle the offer button click. Toggle OfferForm visibility.
+    const handleMakeOffer = () => {setShowOfferForm(true)}
+
+    // Handler to add an offer
+    const handleAddOffer = async (offerData) => {
+
+        try {
+            // Create offer using offerService
+            await offerService.createAnOffer({
+
+                ...offerData,
+                // Add listingId to the offer data
+                listing: listingId, 
+                // Add user ID to the offer data
+                user: user._id 
+            })
+
+            // Navigate back to the listing details page after offer creation
+            navigate(`/profiles/${user._id}/dashboard`)
+
+        } catch (error) {
+
+            // Log the error if the offer creation fails
+            console.error('Error adding offer:', error)
+        }
+    }
+
+// -----------------------------------*  COMPONENT RENDERING ----------------------------------------- //
 
     return (
 
@@ -98,17 +130,26 @@ const ListingDetails = () => {
 
                     <p>Seller:{listing.seller.username}</p>
 
-                    {user && <button onClick={handleMakeOffer}>Make an Offer</button>}
-
-                </div>
-
-                /* ....else awaiting data load */
-
+                     {/* render offer form or sign-up message */}
+                     
+                     {user ? (
+                        <>
+                            {!showOfferForm && (
+                                <button onClick={handleMakeOffer}>Make an Offer</button>
+                            )}
+                            {showOfferForm && (
+                                <OfferForm handleAddOffer={handleAddOffer} />
+                            )}
+                        </>
                     ) : (
-
-                        <p>Loading...</p>
-
+                        <p>
+                            You must <Link to="/profiles/signup">sign up</Link> or <Link to="/profiles/signin">sign in</Link> to make an offer.
+                        </p>
                     )}
+                </div>
+            ) : (
+                <p>Loading...</p>
+            )}
 
         </div>
     );
