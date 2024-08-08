@@ -85,7 +85,7 @@ const App = () => {
       const newListing = await listingService.createListing(formData)
 
       // Updating user's listings
-      setUser({ ...user, listings: [...user.listings, newListing._id] })
+      runGetUser()
 
       // Navigate to the newly created listing's details page
       navigate(`/listings/${newListing._id}`)
