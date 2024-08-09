@@ -23,6 +23,7 @@ const Dashboard = ({ handleDelete }) => {
     const populateListings = async (userListings) => {
         const returnValue = userListings.map(async (listingId) => {
             const returnValue = await listingService.getListingById(listingId._id)
+            returnValue.offers = await offerService.getOffersByListingId(listingId._id)
             return returnValue
         })
         return Promise.all(returnValue)
@@ -42,7 +43,7 @@ const Dashboard = ({ handleDelete }) => {
         getListings()
  
         getOffers()
-    }, [])
+    }, [user])
 
     const deleteFunction = async () => {
         await handleDelete(displayedListing._id)
@@ -53,6 +54,10 @@ const Dashboard = ({ handleDelete }) => {
             setListings(await populateListings(user.listings))
             console.log("Listing", listings)
         }
+    }
+
+    const rejectButtonFunction = async (offerId) => {
+        await offerService.assessOffer(offerId, true)
     }
 
     let [overview, setOverview] = useState(true)
@@ -117,8 +122,12 @@ const Dashboard = ({ handleDelete }) => {
                             :
                             <article>
                                 {(displayedListing.offers && displayedListing.offers.length > 0) ?
-                                    displayedListing.offers.map(() => {
-                                        return <p>blah</p>
+                                    displayedListing.offers.map(offer => {
+                                        return (<div>
+                                            <h4>Offer from {offer.user.username}, for {offer.offeringPrice}</h4>
+                                            <p>{offer.message}</p>
+                                            <button onClick={async () => {await rejectButtonFunction(offer._id)}}>Reject Offer</button>
+                                            </div>)
                                     })
                                     :
                                     <p>No Offers On This Listing</p>
