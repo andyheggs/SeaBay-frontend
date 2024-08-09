@@ -124,12 +124,14 @@ const Dashboard = ({ handleDelete }) => {
                             <article>
                                 {(displayedListing.offers && displayedListing.offers.length > 0) ?
                                     displayedListing.offers.map(offer => {
-                                        return (<div>
+                                        return(
+                                        (offer.rejected)? <p>This offer has been rejected</p>:
+                                        <div>
                                             <h4>Offer from {offer.user.username}, for {offer.offeringPrice}</h4>
                                             <p>{offer.message}</p>
                                             <button onClick={async () => {await rejectButtonFunction(offer._id)}}>Reject Offer</button>
-                                            </div>)
-                                    })
+                                            </div>
+                                    )})
                                     :
                                     <p>No Offers On This Listing</p>
                                 }
