@@ -8,7 +8,7 @@ const Landing = () => {
     
     return (
         <main>
-            <h1>Welcome to SeaBay!</h1>
+            <img className="logo-image"  src="https://res.cloudinary.com/dim47nr4g/image/upload/v1723202481/jgtsgti7f1pq4bg0rrwv.png"></img>
         </main>
     );
 

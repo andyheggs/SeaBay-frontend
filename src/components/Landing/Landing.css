@@ -19,3 +19,14 @@
 .landing button {
     font-size: 1.2em;
 }
+
+main {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-image{
+    margin: 0 auto;
+  }

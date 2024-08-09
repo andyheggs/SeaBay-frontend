@@ -136,7 +136,7 @@ const Dashboard = ({ handleDelete }) => {
                         offers.map(offer => {
                             return (<div>
                                 <h5>Offer For {offer.message}</h5>
-                                <UpdateOffer offerData={offer} />
+                                <UpdateOffer passedOfferData={offer} />
                             </div>)
                         })}
                 </div>}

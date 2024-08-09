@@ -57,21 +57,13 @@ const UpdateOffer = ({passedOfferData}) => {
     }
   };
 
-  // Render loading state.
-  if (loading) return <p>Loading...</p>;
-
-  // Render error state.
-  if (error) return <p>Error: {error}</p>;
-
   return (
     <div>
       <h2>Update Offer</h2>
-      {offerData && (
         <OfferForm
           initialValues={offerData}
           handleUpdateOffer={handleUpdateOffer}
         />
-      )}
     </div>
   );
 };
