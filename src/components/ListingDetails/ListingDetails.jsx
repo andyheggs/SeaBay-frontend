@@ -1,19 +1,21 @@
 //---------------------------------------------React Imports-----------------------------------------------// 
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-
+import {useEffect, useState, useContext } from 'react'
+import { useParams } from 'react-router-dom' 
+import { AuthedUserContext } from '../../App'
 
 //-------------------------------------------Component Imports---------------------------------------------//
-import ImageUpload from '../ImageUpload/ImageUpload';
 import './ListingDetails.css'
 
 //--------------------------------------------Service Imports----------------------------------------------//
 import * as listingService from '../../../services/listingService'
+import * as offerService from '../../../services/offerService'
 
 // * LISTING DETAILS COMPONENT //
 
 // fetche and display details of a specific listing:
 const ListingDetails = () => {
+
+    const user = useContext(AuthedUserContext)
 
     //Intialise 'id' from URL params    
     const { listingId } = useParams()
@@ -71,7 +73,7 @@ const ListingDetails = () => {
 
                     <h1>{listing.boatName}</h1>
 
-                    <img className="vessel-image"  src={listing.vesselImage}></img>
+                    <img className="vessel-image"  src={listing.vesselImage} alt={listing.vesselImage}></img>
 
                     <div className='details-group'>
 
@@ -110,6 +112,8 @@ const ListingDetails = () => {
                         </div>
 
                     </div>
+
+                    {user && <button onClick={handleMakeOffer}>Make an Offer</button>}
 
                 </div>
 
