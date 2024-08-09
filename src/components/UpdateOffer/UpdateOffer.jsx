@@ -8,9 +8,9 @@ import { getOfferFromId, editAnOffer } from '../../../services/offerService';
 //--------------------------------------------Component Imports----------------------------------------------//
 import OfferForm from '../OfferForm/OfferForm';
 
-const UpdateOffer = () => {
+const UpdateOffer = ({passedOfferData}) => {
   // Retrieve offerId param from  URL
-  const { offerId } = useParams();
+  //const { offerId } = useParams();
 
   // Initialise navigation function
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const UpdateOffer = () => {
     const fetchOffer = async () => {
       try {
         // Fetch offer data using the offerId.
-        const fetchedOfferData = await getOfferFromId(offerId);
+        const fetchedOfferData = await getOfferFromId(passedOfferData._id);
         setOfferData(fetchedOfferData);
         setLoading(false);
       } catch (err) {
@@ -42,15 +42,15 @@ const UpdateOffer = () => {
     fetchOffer();
 
     // Re-run effect if offerId changes.
-  }, [offerId]);
+  }, []);
 
   // Handler function to update offer data
   const handleUpdateOffer = async (updatedOffer) => {
     try {
       // Attempt to update offer data.
-      await editAnOffer(offerId, updatedOffer);
+      await editAnOffer(passedOfferData._id, updatedOffer);
       // Navigate to the updated offer's detail page.
-      navigate(`/offers/${offerId}`);
+      navigate(`/offers/${passedOfferData._id}`);
     } catch (err) {
       // Handle errors by setting the error state.
       setError(err.message);
