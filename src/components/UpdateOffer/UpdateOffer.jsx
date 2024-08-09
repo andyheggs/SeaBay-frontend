@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 //--------------------------------------------Service Imports----------------------------------------------//
-import { getOfferFromId, editAnOffer } from '../../../services/offerService';
+import { getOfferFromId, editAnOffer, deleteAnOffer } from '../../../services/offerService';
 
 const UpdateOffer = ({passedOfferData}) => {
   // Retrieve offerId param from the URL
@@ -83,6 +83,27 @@ const UpdateOffer = ({passedOfferData}) => {
   // Render error state
   if (error) return <p>Error: {error}</p>;
 
+  //---------------------------------- * DELETE OFFER ------------------------------------------------//
+  // Function to handle offer deletion
+  const handleDelete = async () => {
+    try {
+      // Attempt to delete the offer
+      await deleteAnOffer(passedOfferData._id);
+
+      // Navigate back to the dashboard or appropriate page after deletion
+      navigate('/dashboard');
+    } catch (err) {
+      // Handle errors by setting the error state
+      setError(err.message);
+    }
+  };
+
+  // Render loading state
+  if (loading) return <p>Loading...</p>;
+
+  // Render error state
+  if (error) return <p>Error: {error}</p>;
+
   //---------------------------------- * RENDER FORM ------------------------------------------------//
   return (
     <div>
@@ -111,6 +132,12 @@ const UpdateOffer = ({passedOfferData}) => {
 
         <button type="submit">Update Offer</button>
       </form>
+
+      <button onClick={handleDelete} style={{ marginTop: '20px', color: 'red' }}>
+        Delete Offer
+      </button>
+
+
     </div>
   );
 };
