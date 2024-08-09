@@ -53,7 +53,6 @@ export const getListingById = async (listingId) => {
         'Content-Type': 'application/json',
       },
     });
-
     // Parse response as JSON
     const data = await res.json();
     
