@@ -7,7 +7,7 @@ import './Dashboard.css'
 import { AuthedUserContext } from '../../App'
 import * as offerService from "../../../services/offerService"
 import * as listingService from '../../../services/listingService'
-
+import UpdateOffer from '../UpdateOffer/UpdateOffer';
 //--------------------------------------------Service Imports----------------------------------------------//
 
 
@@ -137,6 +137,7 @@ const Dashboard = ({ handleDelete }) => {
                         offers.map(offer => {
                             return (<div>
                                 <h5>Offer For {offer.message}</h5>
+                                <UpdateOffer offerData={offer} />
                             </div>)
                         })}
                 </div>}

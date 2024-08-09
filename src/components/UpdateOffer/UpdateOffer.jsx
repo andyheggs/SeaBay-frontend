@@ -4,14 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 //--------------------------------------------Service Imports----------------------------------------------//
-import { getOfferFromId, editAnOffer } from '../../services/offerService';
+import { getOfferFromId, editAnOffer } from '../../../services/offerService';
 
 //--------------------------------------------Service Imports----------------------------------------------//
 import OfferForm from '../OfferForm/OfferForm';
 
-const UpdateOffer = () => {
+const UpdateOffer = ({passedOfferData}) => {
   // Retrieve offerId param from  URL
-  const { offerId } = useParams()
   
   // Initialise nav func,
   const navigate = useNavigate()
@@ -30,8 +29,7 @@ const UpdateOffer = () => {
     const fetchOffer = async () => {
       try {
         // Attempt to fetch offer data using the offerId.
-        const data = await getOfferFromId(offerId)
-        setOfferData(data)
+        setOfferData(passedOfferData)
         setLoading(false)
       } catch (err) {
         // Handle errors by setting the error state
@@ -43,15 +41,15 @@ const UpdateOffer = () => {
     fetchOffer()
 
    //re-run effect if offerId changes.
-  }, [offerId]); 
+  }, []); 
 
   // Handler function to update offer data
   const handleUpdate = async (updatedOffer) => {
     try {
       // Attempt to update offer data.
-      await editAnOffer(offerId, updatedOffer)
+      await editAnOffer(offerData._id, updatedOffer)
       // Navigate to the updated offer's detail page.
-      navigate(`/offers/${offerId}`)
+      navigate(`/offers/${offerData._id}`)
     } catch (err) {
       // Handle errors by setting the error state.
       setError(err.message);
@@ -67,14 +65,11 @@ const UpdateOffer = () => {
   return (
     <div>
       <h2>Update Offer</h2>
-      {offerData && (
-        // Render the OfferForm component if offer data is available.
         <OfferForm
           initialValues={offerData}
           onSubmit={handleUpdate}
           submitButtonText="Update Offer"
         />
-      )}
     </div>
   )
 };
