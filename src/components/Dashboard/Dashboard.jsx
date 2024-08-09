@@ -10,8 +10,6 @@ import * as listingService from '../../../services/listingService'
 import UpdateOffer from '../UpdateOffer/UpdateOffer';
 //--------------------------------------------Service Imports----------------------------------------------//
 
-
-
 const Dashboard = ({ handleDelete }) => {
 
     const user = useContext(AuthedUserContext)
@@ -64,6 +62,7 @@ const Dashboard = ({ handleDelete }) => {
     }
     console.log("listings len", listings)
     console.log("GAAAAGSGS", offers)
+
     return (
         <main>
             <h1>Welcome to your Dashboard {user.username}</h1>
