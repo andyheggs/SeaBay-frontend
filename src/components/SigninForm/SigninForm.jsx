@@ -48,10 +48,10 @@ const SigninForm = (props) => {
     }
 
     return (
-        <main>
+        <main className='center-items'>
             <h1>Welcome to Sign-in</h1>
-            <p id="errorMessage">{errorMessage}</p>
-            <form onSubmit={handleSubmit}>
+            <p className='error' id="errorMessage">{errorMessage}</p>
+            <form className='signin-form' onSubmit={handleSubmit}>
                 <div>
                 <label htmlFor="usernameInput">Username</label>
                 <input id="usernameInput" type="text" value={username} name="username" onChange={handleChange}></input>

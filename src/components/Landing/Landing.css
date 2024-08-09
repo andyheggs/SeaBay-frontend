@@ -1,3 +1,4 @@
+/* General landing page styling */
 .landing {
     text-align: center;
     padding: 50px 20px;
@@ -6,27 +7,33 @@
     color: #fff;
 }
 
-.landing h1 {
-    font-size: 3em;
+/* Landing text styling */
+.landing-text {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.landing p {
-    font-size: 1.5em;
-    margin-bottom: 40px;
+.landing-text h1 {
+    font-size: 4em;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin: 0;
 }
 
-.landing button {
-    font-size: 1.2em;
-}
-
+/* Main container styling */
 .logo-main {
     width: 100vw;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background-size: cover;
 }
 
-.logo-image{
-    margin: 0 auto;
-  }
+/* Logo image styling */
+.logo-image {
+    max-width: 50%;
+    height: auto;
+    margin-top: 20px;
+}

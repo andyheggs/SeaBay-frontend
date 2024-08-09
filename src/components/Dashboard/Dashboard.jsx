@@ -41,9 +41,9 @@ const Dashboard = ({ handleDelete }) => {
             user.offers = await offerService.getOffersFromUser(user._id)
             console.log("TPYOT", user)
             setOffers(user.offers)
-            }
+        }
         getListings()
- 
+
         getOffers()
     }, [user])
 
@@ -70,88 +70,91 @@ const Dashboard = ({ handleDelete }) => {
     console.log("listings len", listings)
     console.log("GAAAAGSGS", offers)
     return (
-        <main>
-            <h1>Welcome to your Dashboard {user.username}</h1>
-            <header>
-                <div>
-                    <h2 onClick={toggleOverview}>Your Listings</h2>
-                </div>
-                <div>
-                    <h2 onClick={toggleOverview}>Your Offers</h2>
-                </div>
-            </header>
-            <h1>Over - {String(overview)}</h1>
-            {(overview) ?
-                <div>
+        <main className='main'>
+            <div className='dashboard'>
+                <h1>Welcome to your Dashboard {user.username}</h1>
+                <header>
                     <div>
-                        <h3>Your Listings</h3>
-                        <div id="userListingsContainer">
-                            {(!listings.length > 0) ?
-                                <p>Looks like you don't have any listings. <Link to="/listings/create">CREATE LISTING</Link></p>
-                                :
-                                listings.map(listing => {
-                                    return (
-                                        <div key={listing._id} onClick={() => { setDisplayedListing(listing) }}>
-                                            <h5>{listing.boatName}</h5>
-                                        </div>
-                                    );
+                        <h2 onClick={toggleOverview}>Your Listings</h2>
+                    </div>
+                    <div>
+                        <h2 onClick={toggleOverview}>Your Offers</h2>
+                    </div>
+                </header>
+                {(overview) ?
+                    <div>
+                        <div className='center-items'>
+                            <h3>Your Listings</h3>
+                            <div className='center-items' id="userListingsContainer">
+                                {(!listings.length > 0) ?
+                                    <p>Looks like you don't have any listings. <Link to="/listings/create">CREATE LISTING</Link></p>
+                                    :
+                                    listings.map(listing => {
+                                        return (
+                                            <div key={listing._id} onClick={() => { setDisplayedListing(listing) }}>
+                                                <h5>{listing.boatName}</h5>
+                                            </div>
+                                        );
 
-                                })}
-                            {(displayedListing === "Loading") ?
-                                <p>Loading Content</p>
-                                :
-                                <article>
-                                    <header>
-                                        <h2>{displayedListing.boatName}</h2>
-                                        <p>
-                                            {displayedListing.seller.username} posted on {new Date(displayedListing.listingCreated).toLocaleDateString()}
-                                        </p>
-                                    </header>
-                                    <p>Make: {displayedListing.make}</p>
-                                    <p>Model: {displayedListing.model}</p>
-                                    <p>Price: £{displayedListing.price}</p>
-                                    <Link to={`/listings/${displayedListing._id}/edit`}><div>EDIT LISTING</div></Link>
-                                    <button onClick={deleteFunction}>DELETE LISTING</button>
-                                </article>
-                            }
+                                    })}
+                                {(displayedListing === "Loading") ?
+                                    <p>Loading Content</p>
+                                    :
+                                    <article className='center-items'>
+                                        <header style={{ width: "60%" }}>
+                                            <h2>{displayedListing.boatName}</h2>
+                                            <p>
+                                                {displayedListing.seller.username} posted on {new Date(displayedListing.listingCreated).toLocaleDateString()}
+                                            </p>
+                                        </header>
+                                        <p>Make: {displayedListing.make}</p>
+                                        <p>Model: {displayedListing.model}</p>
+                                        <p>Price: £{displayedListing.price}</p>
+                                        <Link to={`/listings/${displayedListing._id}/edit`}><div>EDIT LISTING</div></Link>
+                                        <button onClick={deleteFunction}>DELETE LISTING</button>
+                                    </article>
+                                }
+                            </div>
+
+                            <div>
+                                <h3>Current Offers</h3>
+                                {(displayedListing === "Loading") ?
+                                    <p>Loading Content</p>
+                                    :
+                                    <article>
+                                        {(displayedListing.offers && displayedListing.offers.length > 0) ?
+                                            displayedListing.offers.map(offer => {
+                                                return (
+                                                    (offer.rejected) ? <p>This offer has been rejected</p> :
+                                                        <div>
+                                                            <h4>Offer from {offer.user.username}, for {offer.offeringPrice}</h4>
+                                                            <p>{offer.message}</p>
+                                                            <button onClick={async () => { await rejectButtonFunction(offer._id) }}>Reject Offer</button>
+                                                        </div>
+                                                )
+                                            })
+                                            :
+                                            <p>No Offers On This Listing</p>
+                                        }
+                                    </article>
+                                }
+                            </div>
                         </div>
                     </div>
+                    :
                     <div>
-                        <h3>Current Offers</h3>
-                        {(displayedListing === "Loading") ?
-                            <p>Loading Content</p>
+                        <h3>Your Offers</h3>
+                        {(!offers.length > 0) ?
+                            <p>Looks like you don't have any offers.</p>
                             :
-                            <article>
-                                {(displayedListing.offers && displayedListing.offers.length > 0) ?
-                                    displayedListing.offers.map(offer => {
-                                        return(
-                                        (offer.rejected)? <p>This offer has been rejected</p>:
-                                        <div>
-                                            <h4>Offer from {offer.user.username}, for {offer.offeringPrice}</h4>
-                                            <p>{offer.message}</p>
-                                            <button onClick={async () => {await rejectButtonFunction(offer._id)}}>Reject Offer</button>
-                                            </div>
-                                    )})
-                                    :
-                                    <p>No Offers On This Listing</p>
-                                }
-                            </article>
-                        }
-                    </div>
-                </div>
-                :
-                <div>
-                    <h3>Your Offers</h3>
-                    {(!offers.length > 0) ?
-                        <p>Looks like you don't have any offers.</p>
-                        :
-                        offers.map(offer => {
-                            return (<div>
-                                <h5>Offer For {offer.message}</h5>
-                                <UpdateOffer passedOfferData={offer} />
-                            </div>)
-                        })}
-                </div>}
+                            offers.map(offer => {
+                                return (<div>
+                                    <h5>Offer For {offer.message}</h5>
+                                    <UpdateOffer passedOfferData={offer} />
+                                </div>)
+                            })}
+                    </div>}
+            </div>
         </main>
     )
 }

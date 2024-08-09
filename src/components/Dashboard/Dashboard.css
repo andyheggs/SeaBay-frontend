@@ -1,11 +1,21 @@
 /* General dashboard layout */
+.main {
+    width:100vw;
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+}
+
 .dashboard {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: rgb(248, 249, 250, 0.7);
+    border-radius: 20px;
+    margin:40px auto;
     min-height: 100vh; /* Ensures the dashboard covers the full viewport height */
+    width: 80%;
 }
 
 .dashboard h1 {
@@ -30,9 +40,18 @@
 }
 
 .dashboard header h2 {
-    margin: 0;
+    margin: auto 0;
     font-size: 1.5em;
     transition: color 0.3s;
+    background-color: rgb(248, 249, 250, 0.7);
+    border-radius: 12px;
+    height: fit-content;
+    padding: 2px;
+}
+
+.dashboard h3 {
+    font-size: larger;
+    font-weight: bolder;
 }
 
 .dashboard header h2:hover {
@@ -170,4 +189,10 @@
 .no-listings-message {
     font-size: 1.2em;
     color: #777;
+}
+
+.center-items{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

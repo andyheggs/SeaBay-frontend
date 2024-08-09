@@ -50,10 +50,10 @@ const SignupForm = (props) => {
     }
 
     return (
-        <main>
+        <main className='center-items'>
             <h1>Welcome to your SignupForm</h1>
-            <p id="errorMessage">{errorMessage}</p>
-            <form onSubmit={handleSubmit}>
+            <p className='error' id="errorMessage">{errorMessage}</p>
+            <form className='signup-form' onSubmit={handleSubmit}>
                 <div>
                 <label htmlFor="usernameInput">Username</label>
                 <input id="usernameInput" type="text" value={username} name="username" onChange={handleChange}></input>
