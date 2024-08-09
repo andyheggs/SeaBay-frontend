@@ -55,10 +55,27 @@ const getOffersFromListing = async (listingId) => {
 
 //!-----------------------------GET OFFER FORM USER------------------------------------------//
 
-// Maybe Obsolete 
+// Not Obsolete 
 const getOffersFromUser = async (userId) => {
+    console.log("CONSOOOLLLLL", userId)
     try {
+        const res = await fetch(`${BACKEND_URL}/offers/user/${userId}`, {
+            headers: {
+                // Indicates that the request body format is JSON
+                "Content-Type": "application/json",
+                // Authorisation token from local storage
+                'authorization': `Bearer ${localStorage.getItem("token")}`
+            },
+        })
+        console.log(res)
+        // Parse the JSON response
+        const data = await res.json()
 
+        // Throw error
+        if (data.error) throw new Error(data.error)
+
+        // Return parsed data
+        return data
     } catch (error) {
         console.log(error)
         throw new Error(error)

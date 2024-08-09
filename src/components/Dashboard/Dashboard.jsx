@@ -24,17 +24,7 @@ const Dashboard = ({ handleDelete }) => {
 
     const populateListings = async (userListings) => {
         const returnValue = userListings.map(async (listingId) => {
-            console.log("id", listingId)
             const returnValue = await listingService.getListingById(listingId._id)
-            return returnValue
-        })
-        return Promise.all(returnValue)
-    }
-
-    const populateOffers = async (userOffers) => {
-        const returnValue = userOffers.map(async (offerId) => {
-            console.log("OFFEROEid", offerId)
-            const returnValue = await offerService.getOfferFromId(offerId)
             return returnValue
         })
         return Promise.all(returnValue)
@@ -42,24 +32,15 @@ const Dashboard = ({ handleDelete }) => {
 
     useEffect(() => {
         const getListings = async () => {
-            console.log("TPYOT", user)
-            console.log("effect", user.listings.length)
             if (user.listings.length > 0) {
-                console.log("Runnign", user.listings)
                 setListings(await populateListings(user.listings))
-                console.log("Listing", listings)
             }
         }
         const getOffers = async () => {
+            user.offers = await offerService.getOffersFromUser(user._id)
             console.log("TPYOT", user)
-            console.log("effect", user.offers.length)
-            if (user.offers.length > 0) {
-                console.log("Runnign", user.offers)
-                setOffers(await populateOffers(user.offers))
-                console.log("Listing", offers)
+            setOffers(user.offers)
             }
-
-        }
         getListings()
         // ! DISABLED UNTIL OFFER STUFF IS ADDED AS I CBA 
         getOffers()
@@ -82,6 +63,7 @@ const Dashboard = ({ handleDelete }) => {
         setOverview((overview) ? overview = false : overview = true)
     }
     console.log("listings len", listings)
+    console.log("GAAAAGSGS", offers)
     return (
         <main>
             <h1>Welcome to your Dashboard {user.username}</h1>
@@ -152,10 +134,11 @@ const Dashboard = ({ handleDelete }) => {
                     {(!offers.length > 0) ?
                         <p>Looks like you don't have any offers.</p>
                         :
-                        offers.map((offer) => {
-                            <div>
-                                <h5>Offer For {offer}</h5>
-                            </div>
+                        offers.map(offer => {
+                            return (<div>
+                                <p>offers 1 </p>
+                                <h5>Offer For {offer.message}</h5>
+                            </div>)
                         })}
                 </div>}
         </main>
