@@ -10,6 +10,8 @@ import * as listingService from '../../../services/listingService'
 import UpdateOffer from '../UpdateOffer/UpdateOffer';
 //--------------------------------------------Service Imports----------------------------------------------//
 
+
+
 const Dashboard = ({ handleDelete }) => {
 
     const user = useContext(AuthedUserContext)
@@ -67,7 +69,6 @@ const Dashboard = ({ handleDelete }) => {
     }
     console.log("listings len", listings)
     console.log("GAAAAGSGS", offers)
-
     return (
         <main>
             <h1>Welcome to your Dashboard {user.username}</h1>
@@ -145,7 +146,7 @@ const Dashboard = ({ handleDelete }) => {
                         offers.map(offer => {
                             return (<div>
                                 <h5>Offer For {offer.message}</h5>
-                                <UpdateOffer offerData={offer} />
+                                <UpdateOffer passedOfferData={offer} />
                             </div>)
                         })}
                 </div>}
