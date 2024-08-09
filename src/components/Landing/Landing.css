@@ -20,7 +20,7 @@
     font-size: 1.2em;
 }
 
-main {
+.logo-main {
     width: 100vw;
     display: flex;
     align-items: center;

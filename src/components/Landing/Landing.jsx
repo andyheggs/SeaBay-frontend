@@ -7,7 +7,7 @@ import './Landing.css'
 const Landing = () => {
     
     return (
-        <main>
+        <main className='logo-main'>
             <img className="logo-image"  src="https://res.cloudinary.com/dim47nr4g/image/upload/v1723202481/jgtsgti7f1pq4bg0rrwv.png"></img>
         </main>
     );
