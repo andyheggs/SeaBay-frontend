@@ -13,6 +13,7 @@ import ListingList from './components/ListingList/ListingList'
 import ListingDetails from './components/ListingDetails/ListingDetails'
 import ListingForm from './components/ListingForm/ListingForm'
 import OfferForm from './components/OfferForm/OfferForm'
+import UpdateOffer from './components/UpdateOffer/UpdateOffer'; 
 
 //-----------------------------------------------Service Imports-----------------------------------------//
 import * as authService from '../services/authService'
@@ -182,6 +183,8 @@ const App = () => {
             <Route path="/offers/create" element={<OfferForm handleAddOffer={handleAddOffer} handleUpdateOffer={handleUpdateOffer} />} />
 
             <Route path="/offers/edit/:offerId" element={<OfferForm handleAddOffer={handleAddOffer} handleUpdateOffer={handleUpdateOffer} />} />
+
+            <Route path="/offers/update/:offerId" element={<UpdateOffer />} />  
 
           </>
 

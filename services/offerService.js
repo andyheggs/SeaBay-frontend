@@ -17,6 +17,34 @@ const getOfferFromId = async (offerId) => {
         throw new Error(error)
     }
 }
+
+// Fetch all offers for a specific listing
+export const getOffersByListingId = async (listingId) => {
+    try {
+        // Send a GET request to fetch offers by listing ID
+      const res = await fetch(`${BACKEND_URL}/offers/listing/${listingId}`, {
+        headers: {
+                // Set the content type to JSON
+          "Content-Type": "application/json",
+                // Include authorisation token from localStorage
+          'authorization': `Bearer ${localStorage.getItem("token")}`
+        },
+      });
+        // Parse the response as JSON
+      const data = await res.json();
+        // If there is an error in the response, throw an error
+      if (data.error) throw new Error(data.error);
+        // Return the fetched data
+      return data;
+    } catch (error) {
+        // Log any errors to the console
+      console.log(error);
+        // Re-throw the error for further handling
+      throw new Error(error);
+    }
+  };
+
+
 // Maybe Obsolete 
 const getOffersFromListing = async (listingId) => {
     try {
