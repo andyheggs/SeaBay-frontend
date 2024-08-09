@@ -62,15 +62,15 @@ const Dashboard = ({ handleDelete }) => {
         }
         getListings()
         // ! DISABLED UNTIL OFFER STUFF IS ADDED AS I CBA 
-        // getOffers()
-    }, [user])
+        getOffers()
+    }, [])
 
     const deleteFunction = async () => {
         await handleDelete(displayedListing._id)
         setDisplayedListing("Loading")
         setListings([])
         if (user.listings.length > 0) {
-            console.log("Runnign", user.listings)
+            console.log("Running", user.listings)
             setListings(await populateListings(user.listings))
             console.log("Listing", listings)
         }

@@ -22,9 +22,11 @@ const OfferForm = ({ handleAddOffer, handleUpdateOffer }) => {
 
   // useEffect hook to fetch offer data based on offerId when component mounts or offerId changes
   useEffect(() => {
+
     const fetchOffer = async () => {
       // Fetch the offer by ID
       const singleOffer = await offerService.getOfferFromId(offerId)
+
       // Update state with fetched data
       setFormData({
         offeringPrice: singleOffer.offeringPrice,
@@ -44,12 +46,14 @@ const OfferForm = ({ handleAddOffer, handleUpdateOffer }) => {
   //---------------------------------- * HANDLE FORM CHANGES ------------------------------------------------//
   // Func. to handle form field changes and update formData state
   const handleChange = (evt) => {
+
     setFormData({ ...formData, [evt.target.name]: evt.target.value })
   }
 
   //---------------------------------- * FORM SUBMISSION ------------------------------------------------//
   // Func. to handle form submission
   const handleSubmit = (evt) => {
+
     // Prevent default form submission
     evt.preventDefault();
 
@@ -58,20 +62,25 @@ const OfferForm = ({ handleAddOffer, handleUpdateOffer }) => {
 
     // If offerId exists, update offer, otherwise add new offer
     if (offerId) {
+
       handleUpdateOffer(offerId, dataToSubmit);
+
     } else {
+
       handleAddOffer(dataToSubmit);
     }
   };
 
   //---------------------------------- * FORM FIELDS ------------------------------------------------//
   return (
+
     <main>
       {/* Heading changes based on whether offerId is present or not */}
       <h1>{offerId ? 'Update Offer' : 'Create Offer'}</h1>
 
       {/* Form element with onSubmit event handler */}
       <form onSubmit={handleSubmit}>
+        
         {/* Field for entering Offering Price */}
         <label htmlFor="offeringPrice-input">Offering Price</label>
         <input
