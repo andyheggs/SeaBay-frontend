@@ -1,4 +1,3 @@
-
 //---------------------------------------------React Imports-----------------------------------------------//
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -6,50 +5,52 @@ import { useParams, useNavigate } from 'react-router-dom';
 //--------------------------------------------Service Imports----------------------------------------------//
 import { getOfferFromId, editAnOffer } from '../../../services/offerService';
 
-//--------------------------------------------Service Imports----------------------------------------------//
+//--------------------------------------------Component Imports----------------------------------------------//
 import OfferForm from '../OfferForm/OfferForm';
 
-const UpdateOffer = ({passedOfferData}) => {
+const UpdateOffer = () => {
   // Retrieve offerId param from  URL
-  
-  // Initialise nav func,
-  const navigate = useNavigate()
-  
-  // useState for storing offer data.
-  const [offerData, setOfferData] = useState(null)
-  
-  // useState for loading 
-  const [loading, setLoading] = useState(true)
+  const { offerId } = useParams();
 
-  // useState for error handling
-  const [error, setError] = useState(null)
+  // Initialise navigation function
+  const navigate = useNavigate();
+
+  // useState for storing offer data.
+  const [offerData, setOfferData] = useState(null);
+
+  // useState for loading state.
+  const [loading, setLoading] = useState(true);
+
+  // useState for error handling.
+  const [error, setError] = useState(null);
 
   // useEffect to fetch offer data when component mounts or offerId changes
   useEffect(() => {
     const fetchOffer = async () => {
       try {
-        // Attempt to fetch offer data using the offerId.
-        setOfferData(passedOfferData)
-        setLoading(false)
+        // Fetch offer data using the offerId.
+        const fetchedOfferData = await getOfferFromId(offerId);
+        setOfferData(fetchedOfferData);
+        setLoading(false);
       } catch (err) {
         // Handle errors by setting the error state
-        setError(err.message)
-        setLoading(false)
+        setError(err.message);
+        setLoading(false);
       }
     };
 
-    fetchOffer()
+    fetchOffer();
 
-   //re-run effect if offerId changes.
-  }, []); 
+    // Re-run effect if offerId changes.
+  }, [offerId]);
 
   // Handler function to update offer data
-  const handleUpdate = async (updatedOffer) => {
+  const handleUpdateOffer = async (updatedOffer) => {
     try {
       // Attempt to update offer data.
-      await editAnOffer(offerData._id, updatedOffer)
+      await editAnOffer(offerId, updatedOffer);
       // Navigate to the updated offer's detail page.
-      navigate(`/offers/${offerData._id}`)
+      navigate(`/offers/${offerId}`);
     } catch (err) {
       // Handle errors by setting the error state.
       setError(err.message);
@@ -57,21 +58,22 @@ const UpdateOffer = ({passedOfferData}) => {
   };
 
   // Render loading state.
-  if (loading) return <p>Loading...</p>
-  
+  if (loading) return <p>Loading...</p>;
+
   // Render error state.
-  if (error) return <p>Error: {error}</p>
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
       <h2>Update Offer</h2>
+      {offerData && (
         <OfferForm
           initialValues={offerData}
-          onSubmit={handleUpdate}
-          submitButtonText="Update Offer"
+          handleUpdateOffer={handleUpdateOffer}
         />
+      )}
     </div>
-  )
+  );
 };
 
 export default UpdateOffer;
