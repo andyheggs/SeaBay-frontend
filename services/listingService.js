@@ -1,6 +1,7 @@
 const BACKEND_URL = `${import.meta.env.VITE_EXPRESS_BACKEND_URL}/listings`;
 
 // * -------------------------------------FETCH ALL LISTINGS-------------------------------------//
+
 export const getAllListings = async () => {
 
   // try block to handle potential err's 
