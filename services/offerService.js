@@ -39,7 +39,7 @@ const getOfferFromId = async (offerId) => {
 }
 
 // Fetch all offers for a specific listing
-export const getOffersByListingId = async (listingId) => {
+const getOffersByListingId = async (listingId) => {
     try {
         // Send a GET request to fetch offers by listing ID
       const res = await fetch(`${BACKEND_URL}/offers/listing/${listingId}`, {
@@ -63,20 +63,6 @@ export const getOffersByListingId = async (listingId) => {
       throw new Error(error);
     }
   };
-
-
-// Maybe Obsolete 
-const getOffersFromListing = async (listingId) => {
-
-    try {
-
-    } catch (error) {
-
-        console.log(error)
-        
-        throw new Error(error)
-    }
-}
 
 //!-----------------------------GET OFFER FORM USER------------------------------------------//
 
@@ -268,4 +254,4 @@ const deleteAnOffer = async (offerId) => {
 }
 
 
-export { getOfferFromId, getOffersFromListing, getOffersFromUser, assessOffer, createAnOffer, editAnOffer, deleteAnOffer }
+export { getOfferFromId, getOffersByListingId, getOffersFromUser, assessOffer, createAnOffer, editAnOffer, deleteAnOffer }
