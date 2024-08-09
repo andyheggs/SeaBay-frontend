@@ -39,7 +39,7 @@ const Navbar = (props) => {
                         <li><Link to="/" ><span>Home</span></Link></li>
                         <li><Link to={`/profiles/${user._id}/dashboard`} ><span>Your Dashboard</span></Link></li>
                         <li>
-                            <Link to="/" onClick={props.handlesignout} >
+                            <Link to="/" onClick={props.handleSignout} >
                             <span>Sign Out</span>
                             </Link>
                         </li>

@@ -42,7 +42,7 @@ const Dashboard = ({ handleDelete }) => {
             setOffers(user.offers)
             }
         getListings()
-        // ! DISABLED UNTIL OFFER STUFF IS ADDED AS I CBA 
+ 
         getOffers()
     }, [])
 
