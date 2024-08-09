@@ -113,7 +113,7 @@ const ListingDetails = () => {
 
                         <p className='price'>Price: <span>£{listing.price}</span></p>
 
-                        <p>Seller:{listing.seller.username}</p>
+                        <p>Seller: {listing.seller.username}</p>
 
                     </div>
 
