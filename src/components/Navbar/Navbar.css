@@ -1,37 +1,45 @@
+/* Container for the dropdown and standalone link */
 .DropDownContainer {
     display: flex;
-            justify-content: flex-end;
-            flex-direction: row-reverse;
-    background-color: rgb(84, 128, 250, 0.8);
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    background-color: rgba(84, 128, 250, 0.8);
     width: fit-content;
     align-self: auto;
     border-radius: 10px;
-    padding:6px;
+    padding: 6px;
     position: fixed;
     top: 30px;
     right: 30px;
 }
 
+/* Styling for the hamburger menu */
+.HamBurger {
+    position: relative;
+    cursor: pointer;
+}
+
+/* List item styling */
 li {
     padding: 1px;
     list-style-type: none;
 }
 
+/* Span styling for the links */
 span {
     font-weight: 800;
     font-size: medium;
     color: #333;
     text-shadow: 1px 1px 3px aliceblue;
+    transition: color 0.3s, text-shadow 0.3s;
 }
+
 span:hover {
-    color:aliceblue;
+    color: aliceblue;
     text-shadow: 2px 2px 5px #333;
 }
 
-.HamBurger {
-    position: relative;
-}
-
+/* Navbar branding */
 .navbar {
     background-color: #007bff;
     padding: 15px;
@@ -43,10 +51,43 @@ span:hover {
     margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
+    transition: text-decoration 0.3s;
 }
 
 .navbar a:hover {
     text-decoration: underline;
+}
+
+/* Standalone Boat Listings link styling on the left-hand side */
+.standalone-link {
+    margin-top: 10px;
+    background-color: #333;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    position: fixed;
+    top: 30px;
+    left: 30px; /* Position the link on the left side of the screen */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.standalone-link a {
+    color: rgb(21, 162, 21);
+    font-size: 1.2em;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.standalone-link a:hover {
+    color: #ffcc00;
+    text-shadow: 2px 2px 5px #000;
+}
+
+.standalone-link:hover {
+    background-color: #555;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .navbar .brand {
